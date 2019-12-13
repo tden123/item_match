@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -104,19 +104,25 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "C:\\Users\\teren\\Desktop\\item_match\\pages\\index.js";
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
+const img = "https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg";
+
 class Index extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   render() {
-    return __jsx("div", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 5
+    return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Page"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["EmptyState"], {
+      heading: "Item Bundler",
+      action: {
+        content: "Get Started",
+        onAction: () => {
+          console.log("clicked");
+        }
       },
-      __self: this
-    }, "hello world");
+      image: img
+    }, __jsx("p", null, "Create helpful quizes for your customer"))));
   }
 
 }
@@ -125,7 +131,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -134,6 +140,17 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 module.exports = __webpack_require__(/*! C:\Users\teren\Desktop\item_match\pages\index.js */"./pages/index.js");
 
+
+/***/ }),
+
+/***/ "@shopify/polaris":
+/*!***********************************!*\
+  !*** external "@shopify/polaris" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@shopify/polaris");
 
 /***/ }),
 
