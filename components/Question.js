@@ -4,7 +4,24 @@ import _ from 'lodash';
 
 const Question = () => {
 
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState({
+        "Option 1": {
+            "value": "",
+            "items": []
+        },
+        "Option 2": {
+            "value": "",
+            "items": []
+        },
+        "Option 3": {
+            "value": "",
+            "items": []
+        },
+        "Option 4": {
+            "value": "",
+            "items": []
+        }
+    });
     const [question, setQuestion] = useState('');
     const [numOptions, setNumOptions] = useState(1);
 
@@ -24,10 +41,11 @@ const Question = () => {
             return <div>Loading...</div>
         }
 
+        console.log(options);
+
         return (
             opts.map(item => {
                 const optionName = `Option ${item}`;
-                //setOptions([...options, optionName]);
                 return (
                     <TextField
                         label={optionName}

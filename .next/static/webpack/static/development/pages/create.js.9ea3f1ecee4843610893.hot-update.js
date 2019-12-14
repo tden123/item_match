@@ -23,7 +23,24 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 var Question = function Question() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([1]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+    "Option 1": {
+      "value": "",
+      "items": []
+    },
+    "Option 2": {
+      "value": "",
+      "items": []
+    },
+    "Option 3": {
+      "value": "",
+      "items": []
+    },
+    "Option 4": {
+      "value": "",
+      "items": []
+    }
+  }),
       options = _useState[0],
       setOptions = _useState[1];
 
@@ -54,9 +71,11 @@ var Question = function Question() {
       return __jsx("div", null, "Loading...");
     }
 
+    console.log(options);
     return opts.map(function (item) {
+      var optionName = "Option ".concat(item);
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-        label: "Option ".concat(item),
+        label: optionName,
         type: "text",
         value: '',
         onChange: function onChange(event) {
@@ -92,4 +111,4 @@ var Question = function Question() {
 /***/ })
 
 })
-//# sourceMappingURL=create.js.309a342cfe405018786e.hot-update.js.map
+//# sourceMappingURL=create.js.9ea3f1ecee4843610893.hot-update.js.map

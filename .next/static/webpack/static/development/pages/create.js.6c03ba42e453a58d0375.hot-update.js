@@ -23,7 +23,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 var Question = function Question() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([1]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       options = _useState[0],
       setOptions = _useState[1];
 
@@ -54,16 +54,16 @@ var Question = function Question() {
       return __jsx("div", null, "Loading...");
     }
 
-    var handleChange = function handleChange(event) {
-      console.log(event.target);
-    };
-
+    console.log(question);
     return opts.map(function (item) {
+      var optionName = "Option ".concat(item);
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-        label: "Option ".concat(item),
+        label: optionName,
         type: "text",
         value: '',
-        onChange: handleChange,
+        onChange: function onChange(event) {
+          return console.log(event);
+        },
         key: item
       });
     });
@@ -94,4 +94,4 @@ var Question = function Question() {
 /***/ })
 
 })
-//# sourceMappingURL=create.js.af3001ba3f75d82e6898.hot-update.js.map
+//# sourceMappingURL=create.js.6c03ba42e453a58d0375.hot-update.js.map

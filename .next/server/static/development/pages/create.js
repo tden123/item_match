@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -120,7 +120,24 @@ const Question = () => {
   const {
     0: options,
     1: setOptions
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+    "Option 1": {
+      "value": "",
+      "items": []
+    },
+    "Option 2": {
+      "value": "",
+      "items": []
+    },
+    "Option 3": {
+      "value": "",
+      "items": []
+    },
+    "Option 4": {
+      "value": "",
+      "items": []
+    }
+  });
   const {
     0: question,
     1: setQuestion
@@ -144,9 +161,9 @@ const Question = () => {
       return __jsx("div", null, "Loading...");
     }
 
+    console.log(options);
     return opts.map(item => {
-      const optionName = `Option ${item}`; //setOptions([...options, optionName]);
-
+      const optionName = `Option ${item}`;
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
         label: optionName,
         type: "text",
@@ -219,7 +236,7 @@ const Create = () => {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!*******************************!*\
   !*** multi ./pages/create.js ***!
   \*******************************/

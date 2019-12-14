@@ -23,7 +23,24 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 var Question = function Question() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+    "Option 1": {
+      "value": "",
+      "items": []
+    },
+    "Option 2": {
+      "value": "",
+      "items": []
+    },
+    "Option 3": {
+      "value": "",
+      "items": []
+    },
+    "Option 4": {
+      "value": "",
+      "items": []
+    }
+  }),
       options = _useState[0],
       setOptions = _useState[1];
 
@@ -54,9 +71,9 @@ var Question = function Question() {
       return __jsx("div", null, "Loading...");
     }
 
+    console.log(options);
     return opts.map(function (item) {
-      var optionName = "Option ".concat(item); //setOptions([...options, optionName]);
-
+      var optionName = "Option ".concat(item);
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
         label: optionName,
         type: "text",
@@ -61124,7 +61141,7 @@ var Create = function Create() {
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!**************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
   \**************************************************************************************************************************************/
@@ -61147,5 +61164,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=create.js.map
