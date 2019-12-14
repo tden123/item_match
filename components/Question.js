@@ -1,9 +1,10 @@
 import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import { TextField, Layout, Form, FormLayout } from '@shopify/polaris';
+import _ from 'lodash';
 
 const Question = () => {
 
-    const [options, setOptions] = useState('');
+    const [options, setOptions] = useState([1]);
     const [question, setQuestion] = useState('');
     const [numOptions, setNumOptions] = useState(1);
 
@@ -12,52 +13,57 @@ const Question = () => {
     const handleSubmit = useCallback((_event) => setUrl(''), []);
 
     useEffect(() => {
-        setOptions(displayOptions(numOptions));
+        setOptions(_.range(1, parseInt(numOptions, 10) + 1));
     }, [numOptions])
 
 
-    const displayOptions = (options) => {
-        return (
-        for (let i = 0; i < options; i++) {
-            return (
-                <TextField
-                    label="Option"
-                    type="text"
-                    value={() => { }}
-                    onChange={() => { }}
-
-                />
-            )
+    const displayOptions = (opts) => {
+        console.log(options);
+        if (!opts) {
+            return <div>Loading...</div>
         }
-        )
+        return (
+            opts.map(item => {
+                const fullLabel = `Option ${item}`;
+                return (
+                    <TextField
+                        label={fullLabel}
+                        type="text"
+                        value={''}
+                        onChange={() => { }}
+                        key={item}
+                    />
+                )
+            }))
     }
 
-return (
-    <Fragment>
-        <Form noValidate onSubmit={handleSubmit}>
-            <FormLayout>
-                <TextField
-                    value={question}
-                    onChange={handleQuestion}
-                    label="Question"
-                    type="text"
-                    placeholder="Which of the following do you prefer, etc"
-                />
-                <TextField
-                    label="Number of options"
-                    type="number"
-                    max="4"
-                    min="1"
-                    value={numOptions}
-                    onChange={handleNumOptions}
+    return (
+        <Fragment>
+            <Form noValidate onSubmit={handleSubmit}>
+                <FormLayout>
+                    <TextField
+                        value={question}
+                        onChange={handleQuestion}
+                        label="Question"
+                        type="text"
+                        placeholder="Which of the following do you prefer, etc"
+                    />
+                    <TextField
+                        label="Number of options"
+                        type="number"
+                        max="4"
+                        min="1"
+                        value={numOptions}
+                        onChange={handleNumOptions}
 
-                />
-                {options}
-            </FormLayout>
-        </Form>
+                    />
 
-    </Fragment >
-)
+                    {displayOptions(options)}
+                </FormLayout>
+            </Form>
+
+        </Fragment >
+    )
 }
 
 export default Question;
