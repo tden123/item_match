@@ -120,7 +120,7 @@ const Question = () => {
   const {
     0: options,
     1: setOptions
-  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([1]);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]);
   const {
     0: question,
     1: setQuestion
@@ -129,27 +129,29 @@ const Question = () => {
     0: numOptions,
     1: setNumOptions
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(1);
-  const handleNumOptions = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(option => setNumOptions(option), []);
+  const handleNumOptions = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(option => {
+    if (option > 4) {
+      setNumOptions(4), [];
+    } else {
+      setNumOptions(option), [];
+    }
+  });
   const handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(question => setQuestion(question), []);
   const handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(_event => setUrl(''), []);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    setOptions(lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(numOptions, 10) + 1));
-  }, [numOptions]);
 
   const displayOptions = opts => {
-    console.log(options);
-
     if (!opts) {
       return __jsx("div", null, "Loading...");
     }
 
     return opts.map(item => {
-      const fullLabel = `Option ${item}`;
+      const optionName = `Option ${item}`; //setOptions([...options, optionName]);
+
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-        label: fullLabel,
+        label: optionName,
         type: "text",
         value: '',
-        onChange: () => {},
+        onChange: event => console.log(event),
         key: item
       });
     });
@@ -167,11 +169,12 @@ const Question = () => {
   }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
     label: "Number of options",
     type: "number",
+    maxLength: "1",
     max: "4",
     min: "1",
     value: numOptions,
     onChange: handleNumOptions
-  }), displayOptions(options))));
+  }), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(numOptions, 10) + 1)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Question);
