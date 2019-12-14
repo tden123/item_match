@@ -11,37 +11,40 @@ import _ from 'lodash';
 
 const Question = () => {
   const [options, setOptions] = useState({
-    1: '',
-    2: '',
-    3: '',
-    4: ''
+    1: { value: '' },
+    2: { value: '' },
+    3: { value: '' },
+    4: { value: '' }
   });
   const [question, setQuestion] = useState('');
   const [numOptions, setNumOptions] = useState(2);
 
   const handleAddOption = useCallback(() => {
     if (numOptions > 4) {
-      setNumOptions(4), [];
+      setNumOptions(4);
     } else if (numOptions < 2) {
-      setNumOptions(2), [];
+      setNumOptions(2);
     } else if (numOptions !== 4) {
-      setNumOptions(numOptions + 1), [];
+      setNumOptions(numOptions + 1);
     }
   });
 
   const handleRemoveOption = useCallback(() => {
     if (numOptions > 4) {
-      setNumOptions(4), [];
+      setNumOptions(4);
     } else if (numOptions < 2) {
-      setNumOptions(2), [];
+      setNumOptions(2);
     } else if (numOptions !== 2) {
-      setNumOptions(numOptions - 1), [];
+      if (options[4].value !== '' && numOptions === 4) options[4].value = '';
+      if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+      setNumOptions(numOptions - 1);
     }
   });
 
   const handleQuestion = useCallback(question => setQuestion(question), []);
   const handleSubmit = useCallback(_event => setUrl(''), []);
-  const handleChange = (item, val) => setOptions({ ...options, [item]: val });
+  const handleChange = (item, val) =>
+    setOptions({ ...options, [item]: { value: val } });
 
   const displayOptions = opts => {
     return opts.map(item => {
@@ -49,11 +52,8 @@ const Question = () => {
         <TextField
           label={`Option ${item}`}
           type='text'
-          value={options[item]}
-          onChange={val => {
-            handleChange(item, val);
-            console.log(options);
-          }}
+          value={options[item].value}
+          onChange={val => handleChange(item, val)}
           key={item}
         />
       );

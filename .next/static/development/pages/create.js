@@ -49,10 +49,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 var Question = function Question() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
-    1: '',
-    2: '',
-    3: '',
-    4: ''
+    1: {
+      value: ''
+    },
+    2: {
+      value: ''
+    },
+    3: {
+      value: ''
+    },
+    4: {
+      value: ''
+    }
   }),
       options = _useState[0],
       setOptions = _useState[1];
@@ -67,20 +75,22 @@ var Question = function Question() {
 
   var handleAddOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {
     if (numOptions > 4) {
-      setNumOptions(4), [];
+      setNumOptions(4);
     } else if (numOptions < 2) {
-      setNumOptions(2), [];
+      setNumOptions(2);
     } else if (numOptions !== 4) {
-      setNumOptions(numOptions + 1), [];
+      setNumOptions(numOptions + 1);
     }
   });
   var handleRemoveOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {
     if (numOptions > 4) {
-      setNumOptions(4), [];
+      setNumOptions(4);
     } else if (numOptions < 2) {
-      setNumOptions(2), [];
+      setNumOptions(2);
     } else if (numOptions !== 2) {
-      setNumOptions(numOptions - 1), [];
+      if (options[4].value !== '' && numOptions === 4) options[4].value = '';
+      if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+      setNumOptions(numOptions - 1);
     }
   });
   var handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function (question) {
@@ -91,7 +101,9 @@ var Question = function Question() {
   }, []);
 
   var handleChange = function handleChange(item, val) {
-    return setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, item, val)));
+    return setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, item, {
+      value: val
+    })));
   };
 
   var displayOptions = function displayOptions(opts) {
@@ -99,10 +111,9 @@ var Question = function Question() {
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["TextField"], {
         label: "Option ".concat(item),
         type: "text",
-        value: options[item],
+        value: options[item].value,
         onChange: function onChange(val) {
-          handleChange(item, val);
-          console.log(options);
+          return handleChange(item, val);
         },
         key: item
       });

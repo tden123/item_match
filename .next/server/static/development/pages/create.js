@@ -146,10 +146,18 @@ const Question = () => {
     0: options,
     1: setOptions
   } = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
-    1: '',
-    2: '',
-    3: '',
-    4: ''
+    1: {
+      value: ''
+    },
+    2: {
+      value: ''
+    },
+    3: {
+      value: ''
+    },
+    4: {
+      value: ''
+    }
   });
   const {
     0: question,
@@ -161,27 +169,31 @@ const Question = () => {
   } = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(2);
   const handleAddOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {
     if (numOptions > 4) {
-      setNumOptions(4), [];
+      setNumOptions(4);
     } else if (numOptions < 2) {
-      setNumOptions(2), [];
+      setNumOptions(2);
     } else if (numOptions !== 4) {
-      setNumOptions(numOptions + 1), [];
+      setNumOptions(numOptions + 1);
     }
   });
   const handleRemoveOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {
     if (numOptions > 4) {
-      setNumOptions(4), [];
+      setNumOptions(4);
     } else if (numOptions < 2) {
-      setNumOptions(2), [];
+      setNumOptions(2);
     } else if (numOptions !== 2) {
-      setNumOptions(numOptions - 1), [];
+      if (options[4].value !== '' && numOptions === 4) options[4].value = '';
+      if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+      setNumOptions(numOptions - 1);
     }
   });
   const handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(question => setQuestion(question), []);
   const handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(_event => setUrl(''), []);
 
   const handleChange = (item, val) => setOptions(_objectSpread({}, options, {
-    [item]: val
+    [item]: {
+      value: val
+    }
   }));
 
   const displayOptions = opts => {
@@ -189,11 +201,8 @@ const Question = () => {
       return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["TextField"], {
         label: `Option ${item}`,
         type: "text",
-        value: options[item],
-        onChange: val => {
-          handleChange(item, val);
-          console.log(options);
-        },
+        value: options[item].value,
+        onChange: val => handleChange(item, val),
         key: item
       });
     });
