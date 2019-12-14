@@ -48,7 +48,6 @@ app.prepare().then(() => {
             }
           }
         );
-        console.log(storefront_token);
 
         ctx.cookies.set("shopOrigin", shop, { httpOnly: false });
         ctx.redirect("/");
