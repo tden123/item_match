@@ -11,10 +11,10 @@ import _ from 'lodash';
 
 const Question = () => {
   const [options, setOptions] = useState({
-    'Option 1': '',
-    'Option 2': '',
-    'Option 3': '',
-    'Option 4': ''
+    1: '',
+    2: '',
+    3: '',
+    4: ''
   });
   const [question, setQuestion] = useState('');
   const [numOptions, setNumOptions] = useState(2);
@@ -41,21 +41,19 @@ const Question = () => {
 
   const handleQuestion = useCallback(question => setQuestion(question), []);
   const handleSubmit = useCallback(_event => setUrl(''), []);
+  const handleChange = (item, val) => setOptions({ ...options, [item]: val });
 
   const displayOptions = opts => {
-    if (!opts) {
-      return <div>Loading...</div>;
-    }
-
     return opts.map(item => {
-      const optionName = `Option ${item}`;
       return (
         <TextField
-          label={optionName}
-          name={optionName}
+          label={`Option ${item}`}
           type='text'
-          value={options[optionName]}
-          onChange={e => console.log(e)}
+          value={options[item]}
+          onChange={val => {
+            handleChange(item, val);
+            console.log(options);
+          }}
           key={item}
         />
       );
