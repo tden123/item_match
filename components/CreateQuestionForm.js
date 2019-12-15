@@ -62,20 +62,43 @@ const CreateQuestionForm = () => {
     });
   };
 
+  const removeItemTag = (item, title) => {
+    const items = options[item].items.filter(i => i.title !== title);
+    console.log(items);
+    const value = options[item].value;
+    setOptions({
+      ...options,
+      [item]: { value, items }
+    });
+    console.log(options);
+  };
+
   const displayOptions = opts => {
-    return opts.map(item => {
+    return opts.map(itemNum => {
       return (
-        <div key={item}>
+        <div key={itemNum}>
           <TextField
-            label={`Option ${item}`}
+            label={`Option ${itemNum}`}
             type='text'
-            value={options[item] ? options[item].value : ''}
-            onChange={val => handleChange(item, val)}
+            value={options[itemNum] ? options[itemNum].value : ''}
+            onChange={val => handleChange(itemNum, val)}
           />
+          {options[itemNum] ? (
+            options[itemNum].items.map(item => (
+              <React.Fragment key={item.title}>
+                <p>{item.title}</p>
+                <Button onClick={() => removeItemTag(itemNum, item.title)}>
+                  X
+                </Button>
+              </React.Fragment>
+            ))
+          ) : (
+            <div />
+          )}
           <Button
             onClick={() => {
               setOpen(true);
-              setCurrOption(item);
+              setCurrOption(itemNum);
             }}
           >
             Add Item
@@ -95,7 +118,7 @@ const CreateQuestionForm = () => {
           setOptions({
             ...options,
             [currOption]: {
-              value: options[currOption].value,
+              value: options[currOption] ? options[currOption].value : '',
               items: resources.selection
             }
           });
