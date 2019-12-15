@@ -150,16 +150,20 @@ const Question = () => {
     1: setOptions
   } = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
     1: {
-      value: ''
+      value: '',
+      items: []
     },
     2: {
-      value: ''
+      value: '',
+      items: []
     },
     3: {
-      value: ''
+      value: '',
+      items: []
     },
     4: {
-      value: ''
+      value: '',
+      items: []
     }
   });
   const {
@@ -174,6 +178,10 @@ const Question = () => {
     0: open,
     1: setOpen
   } = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(false);
+  const {
+    0: currOption,
+    1: setCurrOption
+  } = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(0);
   const handleAddOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {
     if (numOptions > 4) {
       setNumOptions(4);
@@ -203,6 +211,8 @@ const Question = () => {
     }
   }));
 
+  const handleAddItemsToOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {});
+
   const displayOptions = opts => {
     return opts.map(item => {
       return __jsx("div", {
@@ -213,7 +223,10 @@ const Question = () => {
         value: options[item].value,
         onChange: val => handleChange(item, val)
       }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-        onClick: () => setOpen(true)
+        onClick: () => {
+          setOpen(true);
+          setCurrOption(item);
+        }
       }, "Add Item"));
     });
   };
@@ -222,8 +235,20 @@ const Question = () => {
     resourceType: "Product",
     showVariants: false,
     open: open,
-    onSelection: () => {},
-    onCancel: () => setOpen(false)
+    onSelection: async resources => {
+      const newItem = {
+        value: options[currOption].value,
+        items: resources.selection
+      };
+      await setOptions(_objectSpread({}, options, {
+        [currOption]: newItem
+      }));
+      console.log(options);
+    },
+    onCancel: () => {
+      setOpen(false);
+      setCurrOption(0);
+    }
   }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Form"], {
     noValidate: true,
     onSubmit: handleSubmit

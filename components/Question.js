@@ -12,14 +12,15 @@ import _ from 'lodash';
 
 const Question = () => {
     const [options, setOptions] = useState({
-        1: { value: '' },
-        2: { value: '' },
-        3: { value: '' },
-        4: { value: '' }
+        1: { value: '', items: [] },
+        2: { value: '', items: [] },
+        3: { value: '', items: [] },
+        4: { value: '', items: [] }
     });
     const [question, setQuestion] = useState('');
     const [numOptions, setNumOptions] = useState(2);
     const [open, setOpen] = useState(false);
+    const [currOption, setCurrOption] = useState(0);
 
     const handleAddOption = useCallback(() => {
         if (numOptions > 4) {
@@ -47,6 +48,7 @@ const Question = () => {
     const handleSubmit = useCallback(_event => setUrl(''), []);
     const handleChange = (item, val) =>
         setOptions({ ...options, [item]: { value: val } });
+    const handleAddItemsToOption = useCallback(() => { })
 
     const displayOptions = opts => {
         return opts.map(item => {
@@ -59,7 +61,10 @@ const Question = () => {
                         onChange={val => handleChange(item, val)}
                     />
                     <Button
-                        onClick={() => setOpen(true)}
+                        onClick={() => {
+                            setOpen(true);
+                            setCurrOption(item);
+                        }}
                     >Add Item</Button>
                 </div>
             );
@@ -73,8 +78,16 @@ const Question = () => {
                 resourceType="Product"
                 showVariants={false}
                 open={open}
-                onSelection={() => { }}
-                onCancel={() => setOpen(false)}
+                onSelection={async (resources) => {
+                    const newItem = { value: options[currOption].value, items: resources.selection };
+                    await setOptions({
+                        ...options,
+                        [currOption]: newItem
+                    })
+                    console.log(options);
+                }
+                }
+                onCancel={() => { setOpen(false); setCurrOption(0); }}
             />
 
             <Form noValidate onSubmit={handleSubmit}>
@@ -90,21 +103,21 @@ const Question = () => {
                         {numOptions === 4 ? (
                             <Button primary disabled>
                                 Add Option
-              </Button>
+                            </Button>
                         ) : (
                                 <Button primary onClick={handleAddOption}>
                                     Add Option
-              </Button>
+                                </Button>
                             )}
 
                         {numOptions === 2 ? (
                             <Button secondary disabled>
                                 Remove Option
-              </Button>
+                            </Button>
                         ) : (
                                 <Button secondary onClick={handleRemoveOption}>
                                     Remove Option
-              </Button>
+                                </Button>
                             )}
                     </ButtonGroup>
 
