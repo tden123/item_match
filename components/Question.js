@@ -38,8 +38,8 @@ const Question = () => {
         } else if (numOptions < 2) {
             setNumOptions(2);
         } else if (numOptions !== 2) {
-            if (options[4].value !== '' && numOptions === 4) options[4].value = '';
-            if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+            if (options[4].value !== '' && numOptions === 4) { options[4].value = ''; options[4].items = [] };
+            if (options[3].value !== '' && numOptions === 3) { options[3].value = ''; options[3].items = [] };
             setNumOptions(numOptions - 1);
         }
     });
@@ -128,7 +128,13 @@ const Question = () => {
 
                     {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}
 
-                    <Button primary onClick={() => console.log(options)}>Submit</Button>
+                    <Button primary onClick={() => {
+                        const payload = {
+                            question,
+                            options
+                        }
+                        console.log(payload)
+                    }}>Submit</Button>
                 </FormLayout>
             </Form>
         </Fragment>

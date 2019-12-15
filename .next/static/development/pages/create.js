@@ -103,8 +103,19 @@ var Question = function Question() {
     } else if (numOptions < 2) {
       setNumOptions(2);
     } else if (numOptions !== 2) {
-      if (options[4].value !== '' && numOptions === 4) options[4].value = '';
-      if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+      if (options[4].value !== '' && numOptions === 4) {
+        options[4].value = '';
+        options[4].items = [];
+      }
+
+      ;
+
+      if (options[3].value !== '' && numOptions === 3) {
+        options[3].value = '';
+        options[3].items = [];
+      }
+
+      ;
       setNumOptions(numOptions - 1);
     }
   });
@@ -185,7 +196,11 @@ var Question = function Question() {
   }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     onClick: function onClick() {
-      return console.log(options);
+      var payload = {
+        question: question,
+        options: options
+      };
+      console.log(payload);
     }
   }, "Submit"))));
 };
@@ -63341,7 +63356,7 @@ var Create = function Create() {
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!**************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
   \**************************************************************************************************************************************/
@@ -63364,5 +63379,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=create.js.map

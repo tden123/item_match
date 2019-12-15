@@ -23,16 +23,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "./node_modules/@babel/runtime-corejs2/core-js/parse-int.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @shopify/app-bridge-react */ "./node_modules/@shopify/app-bridge-react/index.js");
-/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/index.es.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @shopify/app-bridge-react */ "./node_modules/@shopify/app-bridge-react/index.js");
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/index.es.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -41,12 +39,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
 
 
 
@@ -54,7 +51,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 var Question = function Question() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
     1: {
       value: '',
       items: []
@@ -75,23 +72,23 @@ var Question = function Question() {
       options = _useState[0],
       setOptions = _useState[1];
 
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])(''),
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(''),
       question = _useState2[0],
       setQuestion = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])(2),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(2),
       numOptions = _useState3[0],
       setNumOptions = _useState3[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])(false),
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(false),
       open = _useState4[0],
       setOpen = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])(0),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(0),
       currOption = _useState5[0],
       setCurrOption = _useState5[1];
 
-  var handleAddOption = Object(react__WEBPACK_IMPORTED_MODULE_9__["useCallback"])(function () {
+  var handleAddOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {
     if (numOptions > 4) {
       setNumOptions(4);
     } else if (numOptions < 2) {
@@ -100,45 +97,56 @@ var Question = function Question() {
       setNumOptions(numOptions + 1);
     }
   });
-  var handleRemoveOption = Object(react__WEBPACK_IMPORTED_MODULE_9__["useCallback"])(function () {
+  var handleRemoveOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {
     if (numOptions > 4) {
       setNumOptions(4);
     } else if (numOptions < 2) {
       setNumOptions(2);
     } else if (numOptions !== 2) {
-      if (options[4].value !== '' && numOptions === 4) options[4].value = '';
-      if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+      if (options[4].value !== '' && numOptions === 4) {
+        options[4].value = '';
+        options[4].items = [];
+      }
+
+      ;
+
+      if (options[3].value !== '' && numOptions === 3) {
+        options[3].value = '';
+        options[3].items = [];
+      }
+
+      ;
       setNumOptions(numOptions - 1);
     }
   });
-  var handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_9__["useCallback"])(function (question) {
+  var handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function (question) {
     return setQuestion(question);
   }, []);
-  var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_9__["useCallback"])(function (_event) {
+  var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function (_event) {
     return setUrl('');
   }, []);
 
   var handleChange = function handleChange(item, val) {
-    setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])({}, item, {
+    setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, item, {
       value: val,
       items: options[item].items
     })));
   };
 
-  var handleAddItemsToOption = Object(react__WEBPACK_IMPORTED_MODULE_9__["useCallback"])(function () {});
+  var handleAddItemsToOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {});
 
   var displayOptions = function displayOptions(opts) {
     return opts.map(function (item) {
       return __jsx("div", {
         key: item
-      }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["TextField"], {
+      }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextField"], {
         label: "Option ".concat(item),
         type: "text",
         value: options[item].value,
         onChange: function onChange(val) {
           return handleChange(item, val);
         }
-      }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["Button"], {
+      }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
         onClick: function onClick() {
           setOpen(true);
           setCurrOption(item);
@@ -148,56 +156,44 @@ var Question = function Question() {
     });
   };
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_9__["Fragment"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_10__["ResourcePicker"], {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
     resourceType: "Product",
     showVariants: false,
     open: open,
-    onSelection: function _callee(resources) {
-      var newItem;
-      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7___default.a.async(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              newItem = {
-                value: options[currOption].value,
-                items: resources.selection
-              };
-              _context.next = 3;
-              return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7___default.a.awrap(setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])({}, currOption, newItem))));
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      });
+    onSelection: function onSelection(resources) {
+      setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, currOption, {
+        value: options[currOption].value,
+        items: resources.selection
+      })));
+      setOpen(false);
+      setCurrOption(0);
     },
     onCancel: function onCancel() {
       setOpen(false);
       setCurrOption(0);
     }
-  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["Form"], {
+  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Form"], {
     noValidate: true,
     onSubmit: handleSubmit
-  }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["FormLayout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["TextField"], {
+  }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["FormLayout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextField"], {
     value: question,
     onChange: handleQuestion,
     label: "Question",
     type: "text",
     placeholder: "Which of the following do you prefer, etc"
-  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["ButtonGroup"], null, numOptions === 4 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["Button"], {
+  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], null, numOptions === 4 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     disabled: true
-  }, "Add Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["Button"], {
+  }, "Add Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     onClick: handleAddOption
-  }, "Add Option"), numOptions === 2 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["Button"], {
+  }, "Add Option"), numOptions === 2 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     secondary: true,
     disabled: true
-  }, "Remove Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["Button"], {
+  }, "Remove Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     secondary: true,
     onClick: handleRemoveOption
-  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_12___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_11__["Button"], {
+  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     onClick: function onClick() {
       return console.log(options);
@@ -210,4 +206,4 @@ var Question = function Question() {
 /***/ })
 
 })
-//# sourceMappingURL=create.js.26fd254b1468e2aa78ce.hot-update.js.map
+//# sourceMappingURL=create.js.96cd390a9a209f3684cb.hot-update.js.map

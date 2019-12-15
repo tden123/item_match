@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -197,8 +197,19 @@ const Question = () => {
     } else if (numOptions < 2) {
       setNumOptions(2);
     } else if (numOptions !== 2) {
-      if (options[4].value !== '' && numOptions === 4) options[4].value = '';
-      if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+      if (options[4].value !== '' && numOptions === 4) {
+        options[4].value = '';
+        options[4].items = [];
+      }
+
+      ;
+
+      if (options[3].value !== '' && numOptions === 3) {
+        options[3].value = '';
+        options[3].items = [];
+      }
+
+      ;
       setNumOptions(numOptions - 1);
     }
   });
@@ -276,7 +287,13 @@ const Question = () => {
     onClick: handleRemoveOption
   }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
-    onClick: () => console.log(options)
+    onClick: () => {
+      const payload = {
+        question,
+        options
+      };
+      console.log(payload);
+    }
   }, "Submit"))));
 };
 
@@ -418,7 +435,7 @@ const Create = () => {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!*******************************!*\
   !*** multi ./pages/create.js ***!
   \*******************************/

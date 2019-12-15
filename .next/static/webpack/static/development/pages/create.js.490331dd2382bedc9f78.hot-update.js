@@ -103,8 +103,19 @@ var Question = function Question() {
     } else if (numOptions < 2) {
       setNumOptions(2);
     } else if (numOptions !== 2) {
-      if (options[4].value !== '' && numOptions === 4) options[4].value = '';
-      if (options[3].value !== '' && numOptions === 3) options[3].value = '';
+      if (options[4].value !== '' && numOptions === 4) {
+        options[4].value = '';
+        options[4].items = [];
+      }
+
+      ;
+
+      if (options[3].value !== '' && numOptions === 3) {
+        options[3].value = '';
+        options[3].items = [];
+      }
+
+      ;
       setNumOptions(numOptions - 1);
     }
   });
@@ -154,6 +165,8 @@ var Question = function Question() {
         value: options[currOption].value,
         items: resources.selection
       })));
+      setOpen(false);
+      setCurrOption(0);
     },
     onCancel: function onCancel() {
       setOpen(false);
@@ -183,20 +196,18 @@ var Question = function Question() {
   }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     onClick: function onClick() {
-      return console.log(options);
+      var payload = {
+        question: question,
+        options: options
+      };
+      console.log(payload);
     }
   }, "Submit"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Question);
 
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/regenerator/index.js":
-false,
-
-/***/ "./node_modules/regenerator-runtime/runtime.js":
-false
+/***/ })
 
 })
-//# sourceMappingURL=create.js.ce31198a62673fd660ca.hot-update.js.map
+//# sourceMappingURL=create.js.490331dd2382bedc9f78.hot-update.js.map
