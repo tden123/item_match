@@ -5,7 +5,8 @@ import {
   Form,
   FormLayout,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Card
 } from '@shopify/polaris';
 import _ from 'lodash';
 
