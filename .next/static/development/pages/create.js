@@ -26,9 +26,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/index.es.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @shopify/app-bridge-react */ "./node_modules/@shopify/app-bridge-react/index.js");
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/index.es.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -42,6 +44,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement;
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
 
 
 
@@ -72,6 +75,10 @@ var Question = function Question() {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(2),
       numOptions = _useState3[0],
       setNumOptions = _useState3[1];
+
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(false),
+      open = _useState4[0],
+      setOpen = _useState4[1];
 
   var handleAddOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {
     if (numOptions > 4) {
@@ -108,40 +115,53 @@ var Question = function Question() {
 
   var displayOptions = function displayOptions(opts) {
     return opts.map(function (item) {
-      return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["TextField"], {
+      return __jsx("div", {
+        key: item
+      }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextField"], {
         label: "Option ".concat(item),
         type: "text",
         value: options[item].value,
         onChange: function onChange(val) {
           return handleChange(item, val);
-        },
-        key: item
-      });
+        }
+      }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        onClick: function onClick() {
+          return setOpen(true);
+        }
+      }, "Add Item"));
     });
   };
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Form"], {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
+    resourceType: "Product",
+    showVariants: false,
+    open: open,
+    onSelection: function onSelection() {},
+    onCancel: function onCancel() {
+      return setOpen(false);
+    }
+  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Form"], {
     noValidate: true,
     onSubmit: handleSubmit
-  }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["FormLayout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["TextField"], {
+  }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["FormLayout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextField"], {
     value: question,
     onChange: handleQuestion,
     label: "Question",
     type: "text",
     placeholder: "Which of the following do you prefer, etc"
-  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["ButtonGroup"], null, numOptions === 4 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], null, numOptions === 4 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     disabled: true
-  }, "Add Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }, "Add Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     onClick: handleAddOption
-  }, "Add Option"), numOptions === 2 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }, "Add Option"), numOptions === 2 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     secondary: true,
     disabled: true
-  }, "Remove Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }, "Remove Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     secondary: true,
     onClick: handleRemoveOption
-  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_10___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)))));
+  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Question);
@@ -1987,6 +2007,860 @@ var classNamesShape =  true ? prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.
   exitDone: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
   exitActive: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
 })]) : undefined;
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Loading/Loading.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Loading/Loading.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var actions_1 = __webpack_require__(/*! @shopify/app-bridge/actions */ "./node_modules/@shopify/app-bridge/actions/index.js");
+var context_1 = __webpack_require__(/*! ../../context */ "./node_modules/@shopify/app-bridge-react/context.js");
+/**
+ * Loading component
+ *
+ * @remarks
+ * React component which wraps the Shopify App Bridge Loading action.
+ *
+ * @public
+ */
+var Loading = /** @class */ (function (_super) {
+    __extends(Loading, _super);
+    function Loading() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Loading.prototype.componentDidMount = function () {
+        var app = this.context;
+        this.loading = actions_1.Loading.create(app);
+        if (this.loading != null) {
+            this.loading.dispatch(actions_1.Loading.Action.START);
+        }
+    };
+    Loading.prototype.componentWillUnmount = function () {
+        if (this.loading != null) {
+            this.loading.dispatch(actions_1.Loading.Action.STOP);
+        }
+    };
+    Loading.prototype.render = function () {
+        return null;
+    };
+    Loading.contextType = context_1.AppBridgeContext;
+    return Loading;
+}(react_1.default.Component));
+exports.default = Loading;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Loading/index.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Loading/index.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Loading_1 = __importDefault(__webpack_require__(/*! ./Loading */ "./node_modules/@shopify/app-bridge-react/components/Loading/Loading.js"));
+exports.default = Loading_1.default;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Modal/Modal.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Modal/Modal.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var actions_1 = __webpack_require__(/*! @shopify/app-bridge/actions */ "./node_modules/@shopify/app-bridge/actions/index.js");
+var transformers_1 = __webpack_require__(/*! ../../utilities/transformers */ "./node_modules/@shopify/app-bridge-react/utilities/transformers.js");
+var context_1 = __webpack_require__(/*! ../../context */ "./node_modules/@shopify/app-bridge-react/context.js");
+/**
+ * Modal component
+ *
+ * @remarks
+ * React component which wraps the Shopify App Bridge Modal action.
+ *
+ * @public
+ */
+var Modal = /** @class */ (function (_super) {
+    __extends(Modal, _super);
+    function Modal() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.focusReturnPoint = null;
+        return _this;
+    }
+    Modal.prototype.componentDidMount = function () {
+        var _a = this.props, open = _a.open, onClose = _a.onClose;
+        var app = this.context;
+        this.modal = actions_1.Modal.create(app, this.transformProps());
+        if (onClose != null)
+            this.modal.subscribe(actions_1.Modal.Action.CLOSE, onClose);
+        if (open) {
+            this.focusReturnPoint = document.activeElement;
+            this.modal.dispatch(actions_1.Modal.Action.OPEN);
+        }
+    };
+    Modal.prototype.componentDidUpdate = function (prevProps) {
+        var _a = this.props, open = _a.open, onClose = _a.onClose;
+        var wasOpen = prevProps.open;
+        var transformedProps = this.transformProps();
+        this.modal.unsubscribe();
+        if (isIframeModal(transformedProps)) {
+            this.modal.set(transformedProps, open);
+        }
+        else {
+            this.modal.set(transformedProps, open);
+        }
+        if (onClose != null)
+            this.modal.subscribe(actions_1.Modal.Action.CLOSE, onClose);
+        if (wasOpen !== open) {
+            if (open) {
+                this.modal.dispatch(actions_1.Modal.Action.OPEN);
+            }
+            else {
+                this.modal.dispatch(actions_1.Modal.Action.CLOSE);
+            }
+        }
+        if (!wasOpen && open) {
+            this.focusReturnPoint = document.activeElement;
+        }
+        else if (wasOpen &&
+            !open &&
+            this.focusReturnPoint != null &&
+            document.contains(this.focusReturnPoint)) {
+            this.focusReturnPoint.focus();
+            this.focusReturnPoint = null;
+        }
+    };
+    Modal.prototype.componentWillUnmount = function () {
+        this.modal.unsubscribe();
+        if (this.props.open) {
+            this.modal.dispatch(actions_1.Modal.Action.CLOSE);
+        }
+    };
+    Modal.prototype.render = function () {
+        return null;
+    };
+    Modal.prototype.transformProps = function () {
+        var _a = this.props, title = _a.title, size = _a.size, message = _a.message, src = _a.src, primaryAction = _a.primaryAction, secondaryActions = _a.secondaryActions;
+        var app = this.context;
+        var safeSize = size != null ? actions_1.Modal.Size[size] : undefined;
+        var srcPayload = {};
+        if (src != null) {
+            if (src.match('^https?://')) {
+                srcPayload.url = src;
+            }
+            else {
+                srcPayload.path = src;
+            }
+        }
+        return __assign({ title: title,
+            message: message, size: safeSize }, srcPayload, { footer: {
+                buttons: transformers_1.transformActions(app, {
+                    primaryAction: primaryAction,
+                    secondaryActions: secondaryActions,
+                }),
+            } });
+    };
+    Modal.contextType = context_1.AppBridgeContext;
+    return Modal;
+}(react_1.default.PureComponent));
+function isIframeModal(options) {
+    return (typeof options.url === 'string' ||
+        typeof options.path === 'string');
+}
+exports.default = Modal;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Modal/index.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Modal/index.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Modal_1 = __importDefault(__webpack_require__(/*! ./Modal */ "./node_modules/@shopify/app-bridge-react/components/Modal/Modal.js"));
+exports.default = Modal_1.default;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Provider/Provider.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Provider/Provider.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var app_bridge_1 = __importStar(__webpack_require__(/*! @shopify/app-bridge */ "./node_modules/@shopify/app-bridge/index.js"));
+var context_1 = __webpack_require__(/*! ../../context */ "./node_modules/@shopify/app-bridge-react/context.js");
+var packageJson = __webpack_require__(/*! ../../package.json */ "./node_modules/@shopify/app-bridge-react/package.json");
+/**
+ * Create an App Bridge client application from a config and pass it as the
+ * value to the context provider.
+ *
+ * @remarks
+ * You'll probably want something a little more robust than storing the current
+ * app instance in a module-level global.
+ *
+ * @public
+ */
+var Provider = /** @class */ (function (_super) {
+    __extends(Provider, _super);
+    function Provider() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.app = _this.appInstance;
+        return _this;
+    }
+    Object.defineProperty(Provider.prototype, "appInstance", {
+        get: function () {
+            if (!this.app) {
+                this.app = app_bridge_1.default(this.props.config);
+                if (this.app && this.app.hooks) {
+                    this.app.hooks.set(app_bridge_1.LifecycleHook.DispatchAction, exports.setClientInterfaceHook);
+                }
+            }
+            return this.app;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Provider.prototype.render = function () {
+        return (react_1.default.createElement(context_1.AppBridgeContext.Provider, { value: this.appInstance }, this.props.children));
+    };
+    return Provider;
+}(react_1.default.Component));
+exports.default = Provider;
+/**
+ * Augment actions with clientInterface metadata, identifying use of this library
+ *
+ * @internal
+ */
+exports.setClientInterfaceHook = function (next) {
+    return function (action) {
+        action.clientInterface = {
+            name: '@shopify/app-bridge-react',
+            version: packageJson.version,
+        };
+        return next(action);
+    };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Provider/index.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Provider/index.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Provider_1 = __importDefault(__webpack_require__(/*! ./Provider */ "./node_modules/@shopify/app-bridge-react/components/Provider/Provider.js"));
+exports.default = Provider_1.default;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/ResourcePicker/ResourcePicker.js":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/ResourcePicker/ResourcePicker.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var actions_1 = __webpack_require__(/*! @shopify/app-bridge/actions */ "./node_modules/@shopify/app-bridge/actions/index.js");
+var context_1 = __webpack_require__(/*! ../../context */ "./node_modules/@shopify/app-bridge-react/context.js");
+/**
+ * ResourcePicker component
+ *
+ * @remarks
+ * React component which wraps the Shopify App Bridge ResourcePicker action.
+ *
+ * @public
+ */
+var ResourcePicker = /** @class */ (function (_super) {
+    __extends(ResourcePicker, _super);
+    function ResourcePicker() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.focusReturnPoint = null;
+        return _this;
+    }
+    ResourcePicker.prototype.componentDidMount = function () {
+        var _a = this.props, open = _a.open, resourceType = _a.resourceType, initialQuery = _a.initialQuery, showHidden = _a.showHidden, allowMultiple = _a.allowMultiple, showVariants = _a.showVariants, actionVerb = _a.actionVerb, onSelection = _a.onSelection, onCancel = _a.onCancel;
+        var app = this.context;
+        this.picker = actions_1.ResourcePicker.create(app, {
+            resourceType: actions_1.ResourcePicker.ResourceType[resourceType],
+            options: {
+                initialQuery: initialQuery,
+                showHidden: showHidden,
+                selectMultiple: allowMultiple,
+                showVariants: showVariants,
+                actionVerb: actionVerb,
+            },
+        });
+        if (onSelection != null) {
+            this.picker.subscribe(actions_1.ResourcePicker.Action.SELECT, onSelection);
+        }
+        if (onCancel != null) {
+            this.picker.subscribe(actions_1.ResourcePicker.Action.CANCEL, onCancel);
+        }
+        if (open) {
+            this.focusReturnPoint = document.activeElement;
+            this.picker.dispatch(actions_1.ResourcePicker.Action.OPEN);
+        }
+    };
+    ResourcePicker.prototype.componentDidUpdate = function (prevProps) {
+        var wasOpen = prevProps.open;
+        var _a = this.props, open = _a.open, initialQuery = _a.initialQuery, showHidden = _a.showHidden, allowMultiple = _a.allowMultiple, showVariants = _a.showVariants, actionVerb = _a.actionVerb, onCancel = _a.onCancel, onSelection = _a.onSelection;
+        this.picker.unsubscribe();
+        this.picker.set({
+            initialQuery: initialQuery,
+            showHidden: showHidden,
+            selectMultiple: allowMultiple,
+            showVariants: showVariants,
+            actionVerb: actionVerb,
+        });
+        if (onSelection != null) {
+            this.picker.subscribe(actions_1.ResourcePicker.Action.SELECT, onSelection);
+        }
+        if (onCancel != null) {
+            this.picker.subscribe(actions_1.ResourcePicker.Action.CANCEL, onCancel);
+        }
+        if (wasOpen !== open) {
+            if (open) {
+                this.picker.dispatch(actions_1.ResourcePicker.Action.OPEN);
+            }
+            else {
+                this.picker.dispatch(actions_1.ResourcePicker.Action.CLOSE);
+            }
+        }
+        if (!wasOpen && open) {
+            this.focusReturnPoint = document.activeElement;
+        }
+        else if (wasOpen &&
+            !open &&
+            this.focusReturnPoint != null &&
+            document.contains(this.focusReturnPoint)) {
+            this.focusReturnPoint.focus();
+            this.focusReturnPoint = null;
+        }
+    };
+    ResourcePicker.prototype.componentWillUnmount = function () {
+        this.picker.unsubscribe();
+    };
+    ResourcePicker.prototype.render = function () {
+        return null;
+    };
+    ResourcePicker.contextType = context_1.AppBridgeContext;
+    ResourcePicker.ActionVerb = actions_1.ResourcePicker.ActionVerb;
+    return ResourcePicker;
+}(react_1.default.PureComponent));
+exports.default = ResourcePicker;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/ResourcePicker/index.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/ResourcePicker/index.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var ResourcePicker_1 = __importDefault(__webpack_require__(/*! ./ResourcePicker */ "./node_modules/@shopify/app-bridge-react/components/ResourcePicker/ResourcePicker.js"));
+exports.default = ResourcePicker_1.default;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/TitleBar/TitleBar.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/TitleBar/TitleBar.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var actions_1 = __webpack_require__(/*! @shopify/app-bridge/actions */ "./node_modules/@shopify/app-bridge/actions/index.js");
+var transformers_1 = __webpack_require__(/*! ../../utilities/transformers */ "./node_modules/@shopify/app-bridge-react/utilities/transformers.js");
+var context_1 = __webpack_require__(/*! ../../context */ "./node_modules/@shopify/app-bridge-react/context.js");
+var TitleBar = /** @class */ (function (_super) {
+    __extends(TitleBar, _super);
+    function TitleBar() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    TitleBar.prototype.componentDidMount = function () {
+        var app = this.context;
+        this.titleBar = actions_1.TitleBar.create(app, this.transformProps());
+    };
+    TitleBar.prototype.componentDidUpdate = function () {
+        this.titleBar.unsubscribe();
+        this.titleBar.set(this.transformProps());
+    };
+    TitleBar.prototype.componentWillUnmount = function () {
+        this.titleBar.unsubscribe();
+    };
+    TitleBar.prototype.render = function () {
+        return null;
+    };
+    TitleBar.prototype.transformProps = function () {
+        var app = this.context;
+        var _a = this.props, title = _a.title, primaryAction = _a.primaryAction, secondaryActions = _a.secondaryActions, actionGroups = _a.actionGroups;
+        return {
+            title: title,
+            buttons: transformers_1.transformActions(app, {
+                primaryAction: primaryAction,
+                secondaryActions: secondaryActions,
+                actionGroups: actionGroups,
+            }),
+            breadcrumbs: this.transformBreadcrumbs(),
+        };
+    };
+    TitleBar.prototype.transformBreadcrumbs = function () {
+        var app = this.context;
+        var breadcrumbs = this.props.breadcrumbs;
+        if (breadcrumbs == null || breadcrumbs.length === 0) {
+            return undefined;
+        }
+        var breadcrumb = breadcrumbs[breadcrumbs.length - 1];
+        var url = breadcrumb.url, onAction = breadcrumb.onAction, target = breadcrumb.target, content = breadcrumb.content;
+        var button = actions_1.Button.create(app, {
+            label: content || '',
+        });
+        var redirect = transformers_1.generateRedirect(app, url, target);
+        if (redirect != null) {
+            button.subscribe(actions_1.Button.Action.CLICK, redirect);
+        }
+        if (onAction != null) {
+            button.subscribe(actions_1.Button.Action.CLICK, onAction);
+        }
+        return button;
+    };
+    TitleBar.contextType = context_1.AppBridgeContext;
+    return TitleBar;
+}(react_1.default.PureComponent));
+exports.default = TitleBar;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/TitleBar/index.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/TitleBar/index.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var TitleBar_1 = __importDefault(__webpack_require__(/*! ./TitleBar */ "./node_modules/@shopify/app-bridge-react/components/TitleBar/TitleBar.js"));
+exports.default = TitleBar_1.default;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Toast/Toast.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Toast/Toast.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var actions_1 = __webpack_require__(/*! @shopify/app-bridge/actions */ "./node_modules/@shopify/app-bridge/actions/index.js");
+var context_1 = __webpack_require__(/*! ../../context */ "./node_modules/@shopify/app-bridge-react/context.js");
+exports.DEFAULT_TOAST_DURATION = 5000;
+/**
+ * Toast component
+ *
+ * @remarks
+ * React component which wraps the Shopify App Bridge Toast action.
+ *
+ * @public
+ */
+var Toast = /** @class */ (function (_super) {
+    __extends(Toast, _super);
+    function Toast() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Toast.prototype.componentDidMount = function () {
+        var app = this.context;
+        var _a = this.props, error = _a.error, content = _a.content, _b = _a.duration, duration = _b === void 0 ? exports.DEFAULT_TOAST_DURATION : _b, onDismiss = _a.onDismiss;
+        this.toast = actions_1.Toast.create(app, {
+            message: content,
+            duration: duration,
+            isError: error,
+        });
+        this.toast.subscribe(actions_1.Toast.Action.CLEAR, onDismiss);
+        this.toast.dispatch(actions_1.Toast.Action.SHOW);
+    };
+    Toast.prototype.componentWillUnmount = function () {
+        this.toast.unsubscribe();
+    };
+    Toast.prototype.render = function () {
+        return null;
+    };
+    Toast.contextType = context_1.AppBridgeContext;
+    return Toast;
+}(react_1.default.PureComponent));
+exports.default = Toast;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/Toast/index.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/Toast/index.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Toast_1 = __importDefault(__webpack_require__(/*! ./Toast */ "./node_modules/@shopify/app-bridge-react/components/Toast/Toast.js"));
+exports.default = Toast_1.default;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/components/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/components/index.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Provider_1 = __webpack_require__(/*! ./Provider */ "./node_modules/@shopify/app-bridge-react/components/Provider/index.js");
+exports.Provider = Provider_1.default;
+var Loading_1 = __webpack_require__(/*! ./Loading */ "./node_modules/@shopify/app-bridge-react/components/Loading/index.js");
+exports.Loading = Loading_1.default;
+var Toast_1 = __webpack_require__(/*! ./Toast */ "./node_modules/@shopify/app-bridge-react/components/Toast/index.js");
+exports.Toast = Toast_1.default;
+var TitleBar_1 = __webpack_require__(/*! ./TitleBar */ "./node_modules/@shopify/app-bridge-react/components/TitleBar/index.js");
+exports.TitleBar = TitleBar_1.default;
+var Modal_1 = __webpack_require__(/*! ./Modal */ "./node_modules/@shopify/app-bridge-react/components/Modal/index.js");
+exports.Modal = Modal_1.default;
+var ResourcePicker_1 = __webpack_require__(/*! ./ResourcePicker */ "./node_modules/@shopify/app-bridge-react/components/ResourcePicker/index.js");
+exports.ResourcePicker = ResourcePicker_1.default;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/context.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/context.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/**
+ * App Bridge context.
+ *
+ * @public
+ */
+exports.AppBridgeContext = react_1.createContext(null);
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(/*! ./components */ "./node_modules/@shopify/app-bridge-react/components/index.js"));
+var context_1 = __webpack_require__(/*! ./context */ "./node_modules/@shopify/app-bridge-react/context.js");
+exports.Context = context_1.AppBridgeContext;
+
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/package.json":
+/*!*************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/package.json ***!
+  \*************************************************************/
+/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, files, gitHead, homepage, jsdelivr, license, main, name, peerDependencies, private, publishConfig, repository, resolutions, scripts, sideEffects, size-limit, types, unpkg, version, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"_from\":\"@shopify/app-bridge-react\",\"_id\":\"@shopify/app-bridge-react@1.11.3\",\"_inBundle\":false,\"_integrity\":\"sha512-ks427K2q/YhU+P0AoVmXUREWOGg9KF4NvYdXgE1dLsQ7sk4AqaiKxloYcbB9obipC/thDi1sx64TXBwjvq817Q==\",\"_location\":\"/@shopify/app-bridge-react\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"tag\",\"registry\":true,\"raw\":\"@shopify/app-bridge-react\",\"name\":\"@shopify/app-bridge-react\",\"escapedName\":\"@shopify%2fapp-bridge-react\",\"scope\":\"@shopify\",\"rawSpec\":\"\",\"saveSpec\":null,\"fetchSpec\":\"latest\"},\"_requiredBy\":[\"#USER\",\"/\"],\"_resolved\":\"https://registry.npmjs.org/@shopify/app-bridge-react/-/app-bridge-react-1.11.3.tgz\",\"_shasum\":\"91094852ba167332b4958641ab92c2a15347d6a3\",\"_spec\":\"@shopify/app-bridge-react\",\"_where\":\"C:\\\\Users\\\\teren\\\\Desktop\\\\item_match\",\"author\":{\"name\":\"Shopify Inc.\"},\"bugs\":{\"url\":\"https://github.com/Shopify/app-bridge/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"@shopify/app-bridge\":\"^1.11.3\"},\"deprecated\":false,\"description\":\"Shopify App Bridge offers React component wrappers for some App Bridge actions. This is a great option if you are already using React and want to follow familiar patterns.\",\"devDependencies\":{\"@types/react\":\"^16.7.3\",\"typescript\":\"3.2.1\"},\"files\":[\"/components/\",\"/context.d.ts\",\"/context.js\",\"/index.d.ts\",\"/index.js\",\"/umd/\",\"/utilities/\",\"/types.d.ts\",\"/types.js\"],\"gitHead\":\"db6984ad57009922721cf249718e7b874a03ef3a\",\"homepage\":\"https://github.com/Shopify/app-bridge#readme\",\"jsdelivr\":\"umd/index.js\",\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"@shopify/app-bridge-react\",\"peerDependencies\":{\"react\":\"^16.0.0\"},\"private\":false,\"publishConfig\":{\"access\":\"public\",\"@shopify:registry\":\"https://registry.npmjs.org\"},\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/Shopify/app-bridge.git\"},\"resolutions\":{\"sqlite3\":\"4.0.1\"},\"scripts\":{\"build\":\"yarn build:tsc && yarn build:umd\",\"build:tsc\":\"NODE_ENV=production tsc\",\"build:umd\":\"NODE_ENV=production webpack -p\",\"check\":\"tsc --pretty --noEmit\",\"clean\":\"cat package.json | node -pe \\\"JSON.parse(require('fs').readFileSync('/dev/stdin').toString()).files.map(f => './'+f).join(' ')\\\" | xargs rm -rf\",\"pack\":\"yarn pack\",\"size\":\"size-limit\"},\"sideEffects\":false,\"size-limit\":[{\"limit\":\"25 KB\",\"path\":\"index.js\"}],\"types\":\"index.d.ts\",\"unpkg\":\"umd/index.js\",\"version\":\"1.11.3\"}");
+
+/***/ }),
+
+/***/ "./node_modules/@shopify/app-bridge-react/utilities/transformers.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@shopify/app-bridge-react/utilities/transformers.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var actions_1 = __webpack_require__(/*! @shopify/app-bridge/actions */ "./node_modules/@shopify/app-bridge/actions/index.js");
+function generateRedirect(appBridge, url, target, external) {
+    if (target === void 0) { target = 'APP'; }
+    if (url == null) {
+        return undefined;
+    }
+    var redirect = actions_1.Redirect.create(appBridge);
+    var payload = external === true
+        ? {
+            url: url,
+            newContext: true,
+        }
+        : url;
+    return function () {
+        redirect.dispatch(redirectAction(target, external), payload);
+    };
+}
+exports.generateRedirect = generateRedirect;
+function redirectAction(target, external) {
+    if (external === true) {
+        return actions_1.Redirect.Action.REMOTE;
+    }
+    return actions_1.Redirect.Action[target];
+}
+function transformActions(appBridge, _a) {
+    var primaryAction = _a.primaryAction, secondaryActions = _a.secondaryActions, actionGroups = _a.actionGroups;
+    var primary = transformPrimaryAction(appBridge, primaryAction);
+    var secondary = transformSecondaryActions(appBridge, secondaryActions).concat(transformActionGroups(appBridge, actionGroups));
+    return {
+        primary: primary,
+        secondary: secondary,
+    };
+}
+exports.transformActions = transformActions;
+function transformAction(appBridge, action) {
+    var style = action.destructive === true ? actions_1.Button.Style.Danger : undefined;
+    var button = actions_1.Button.create(appBridge, {
+        label: action.content || '',
+        disabled: action.disabled,
+        style: style,
+    });
+    if (action.onAction) {
+        button.subscribe(actions_1.Button.Action.CLICK, action.onAction);
+    }
+    var redirect = generateRedirect(appBridge, action.url, action.target, action.external);
+    if (redirect != null) {
+        button.subscribe(actions_1.Button.Action.CLICK, redirect);
+    }
+    return button;
+}
+function transformPrimaryAction(appBridge, primaryAction) {
+    if (primaryAction == null) {
+        return undefined;
+    }
+    var primary = transformAction(appBridge, primaryAction);
+    return primary;
+}
+function transformSecondaryActions(appBridge, secondaryActions) {
+    if (secondaryActions === void 0) { secondaryActions = []; }
+    var secondary = secondaryActions.map(function (secondaryAction) {
+        return transformAction(appBridge, secondaryAction);
+    }).slice();
+    return secondary;
+}
+function transformActionGroups(appBridge, actionGroups) {
+    if (actionGroups === void 0) { actionGroups = []; }
+    var buttonGroups = actionGroups.map(function (group) {
+        var buttons = group.actions.map(function (groupAction) {
+            return transformAction(appBridge, groupAction);
+        });
+        return actions_1.ButtonGroup.create(appBridge, { label: group.title, buttons: buttons });
+    }).slice();
+    return buttonGroups;
+}
+
 
 /***/ }),
 
@@ -6947,10 +7821,10 @@ __export(__webpack_require__(/*! ./client */ "./node_modules/@shopify/app-bridge
 /*!*******************************************************!*\
   !*** ./node_modules/@shopify/app-bridge/package.json ***!
   \*******************************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, description, devDependencies, files, gitHead, homepage, jsdelivr, license, main, name, private, publishConfig, repository, resolutions, scripts, sideEffects, size-limit, types, unpkg, version, default */
+/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, jsdelivr, license, main, name, private, publishConfig, repository, resolutions, scripts, sideEffects, size-limit, types, unpkg, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"@shopify/app-bridge@1.11.3\",\"C:\\\\Users\\\\Terence\\\\Desktop\\\\item_match\"]],\"_from\":\"@shopify/app-bridge@1.11.3\",\"_id\":\"@shopify/app-bridge@1.11.3\",\"_inBundle\":false,\"_integrity\":\"sha512-EOYUXlkcqZokUDqbbbAFbwfGmZVGYR8parDrS50+0mk19PR0aSl6+guiR4FsYbeROeJgMiY8VFAQ7L7xyysN4A==\",\"_location\":\"/@shopify/app-bridge\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"@shopify/app-bridge@1.11.3\",\"name\":\"@shopify/app-bridge\",\"escapedName\":\"@shopify%2fapp-bridge\",\"scope\":\"@shopify\",\"rawSpec\":\"1.11.3\",\"saveSpec\":null,\"fetchSpec\":\"1.11.3\"},\"_requiredBy\":[\"/@shopify/polaris\"],\"_resolved\":\"https://registry.npmjs.org/@shopify/app-bridge/-/app-bridge-1.11.3.tgz\",\"_spec\":\"1.11.3\",\"_where\":\"C:\\\\Users\\\\Terence\\\\Desktop\\\\item_match\",\"author\":{\"name\":\"Shopify Inc.\"},\"bugs\":{\"url\":\"https://github.com/Shopify/app-bridge/issues\"},\"description\":\"[![Build Status](https://travis-ci.com/Shopify/app-bridge.svg?token=RBRyvqQyN525bnfz7J8p&branch=master)](https://travis-ci.com/Shopify/app-bridge) [![codecov](https://codecov.io/gh/Shopify/app-bridge/branch/master/graph/badge.svg?token=nZ21m39Dr6)](https://codecov.io/gh/Shopify/app-bridge) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md) [![npm version](https://badge.fury.io/js/%40shopify%2Fapp-bridge.svg)](https://badge.fury.io/js/%40shopify%2Fapp-bridge.svg) [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/@shopify/app-bridge.svg)](https://img.shields.io/bundlephobia/minzip/@shopify/app-bridge.svg)\",\"devDependencies\":{\"@types/node\":\"^10.12.5\",\"typescript\":\"3.2.1\"},\"files\":[\"/actions/\",\"/client/\",\"/umd/\",\"/util/\",\"/validate/\",\"/MessageTransport.d.ts\",\"/MessageTransport.js\",\"/development.d.ts\",\"/development.js\",\"/index.d.ts\",\"/index.js\",\"/production.d.ts\",\"/production.js\"],\"gitHead\":\"db6984ad57009922721cf249718e7b874a03ef3a\",\"homepage\":\"https://github.com/Shopify/app-bridge#readme\",\"jsdelivr\":\"umd/index.js\",\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"@shopify/app-bridge\",\"private\":false,\"publishConfig\":{\"access\":\"public\",\"@shopify:registry\":\"https://registry.npmjs.org\"},\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/Shopify/app-bridge.git\"},\"resolutions\":{\"sqlite3\":\"4.0.1\"},\"scripts\":{\"build\":\"yarn build:tsc && yarn build:umd\",\"build:tsc\":\"NODE_ENV=production tsc\",\"build:umd\":\"NODE_ENV=production webpack -p\",\"check\":\"tsc --pretty --noEmit\",\"clean\":\"cat package.json | node -pe \\\"JSON.parse(require('fs').readFileSync('/dev/stdin').toString()).files.map(f => './'+f).join(' ')\\\" | xargs rm -rf\",\"pack\":\"yarn pack\",\"size\":\"size-limit\"},\"sideEffects\":false,\"size-limit\":[{\"limit\":\"15 KB\",\"path\":\"production.js\"}],\"types\":\"index.d.ts\",\"unpkg\":\"umd/index.js\",\"version\":\"1.11.3\"}");
+module.exports = JSON.parse("{\"_from\":\"@shopify/app-bridge@^1.3.0\",\"_id\":\"@shopify/app-bridge@1.11.3\",\"_inBundle\":false,\"_integrity\":\"sha512-EOYUXlkcqZokUDqbbbAFbwfGmZVGYR8parDrS50+0mk19PR0aSl6+guiR4FsYbeROeJgMiY8VFAQ7L7xyysN4A==\",\"_location\":\"/@shopify/app-bridge\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"range\",\"registry\":true,\"raw\":\"@shopify/app-bridge@^1.3.0\",\"name\":\"@shopify/app-bridge\",\"escapedName\":\"@shopify%2fapp-bridge\",\"scope\":\"@shopify\",\"rawSpec\":\"^1.3.0\",\"saveSpec\":null,\"fetchSpec\":\"^1.3.0\"},\"_requiredBy\":[\"/@shopify/polaris\"],\"_resolved\":\"https://registry.npmjs.org/@shopify/app-bridge/-/app-bridge-1.11.3.tgz\",\"_shasum\":\"c8a25f4942a082507f4bc7c56a2163495cdedae5\",\"_spec\":\"@shopify/app-bridge@^1.3.0\",\"_where\":\"C:\\\\Users\\\\teren\\\\Desktop\\\\item_match\\\\node_modules\\\\@shopify\\\\polaris\",\"author\":{\"name\":\"Shopify Inc.\"},\"bugs\":{\"url\":\"https://github.com/Shopify/app-bridge/issues\"},\"bundleDependencies\":false,\"deprecated\":false,\"description\":\"[![Build Status](https://travis-ci.com/Shopify/app-bridge.svg?token=RBRyvqQyN525bnfz7J8p&branch=master)](https://travis-ci.com/Shopify/app-bridge) [![codecov](https://codecov.io/gh/Shopify/app-bridge/branch/master/graph/badge.svg?token=nZ21m39Dr6)](https://codecov.io/gh/Shopify/app-bridge) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md) [![npm version](https://badge.fury.io/js/%40shopify%2Fapp-bridge.svg)](https://badge.fury.io/js/%40shopify%2Fapp-bridge.svg) [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/@shopify/app-bridge.svg)](https://img.shields.io/bundlephobia/minzip/@shopify/app-bridge.svg)\",\"devDependencies\":{\"@types/node\":\"^10.12.5\",\"typescript\":\"3.2.1\"},\"files\":[\"/actions/\",\"/client/\",\"/umd/\",\"/util/\",\"/validate/\",\"/MessageTransport.d.ts\",\"/MessageTransport.js\",\"/development.d.ts\",\"/development.js\",\"/index.d.ts\",\"/index.js\",\"/production.d.ts\",\"/production.js\"],\"gitHead\":\"db6984ad57009922721cf249718e7b874a03ef3a\",\"homepage\":\"https://github.com/Shopify/app-bridge#readme\",\"jsdelivr\":\"umd/index.js\",\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"@shopify/app-bridge\",\"private\":false,\"publishConfig\":{\"access\":\"public\",\"@shopify:registry\":\"https://registry.npmjs.org\"},\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/Shopify/app-bridge.git\"},\"resolutions\":{\"sqlite3\":\"4.0.1\"},\"scripts\":{\"build\":\"yarn build:tsc && yarn build:umd\",\"build:tsc\":\"NODE_ENV=production tsc\",\"build:umd\":\"NODE_ENV=production webpack -p\",\"check\":\"tsc --pretty --noEmit\",\"clean\":\"cat package.json | node -pe \\\"JSON.parse(require('fs').readFileSync('/dev/stdin').toString()).files.map(f => './'+f).join(' ')\\\" | xargs rm -rf\",\"pack\":\"yarn pack\",\"size\":\"size-limit\"},\"sideEffects\":false,\"size-limit\":[{\"limit\":\"15 KB\",\"path\":\"production.js\"}],\"types\":\"index.d.ts\",\"unpkg\":\"umd/index.js\",\"version\":\"1.11.3\"}");
 
 /***/ }),
 
@@ -60975,10 +61849,10 @@ module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5CTerence%5CDesktop%5Citem_match%5Cpages%5Ccreate.js!./":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5CTerence%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
-  \************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js!./":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
+  \**********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -62442,13 +63316,13 @@ var Create = function Create() {
 /***/ }),
 
 /***/ 2:
-/*!****************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5CTerence%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
-  \****************************************************************************************************************************************/
+/*!**************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
+  \**************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5CTerence%5CDesktop%5Citem_match%5Cpages%5Ccreate.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5CTerence%5CDesktop%5Citem_match%5Cpages%5Ccreate.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js!./");
 
 
 /***/ }),

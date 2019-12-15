@@ -119,10 +119,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
-/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @shopify/app-bridge-react */ "@shopify/app-bridge-react");
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
+/* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -136,6 +138,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement;
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
 
 
 
@@ -167,6 +170,10 @@ const Question = () => {
     0: numOptions,
     1: setNumOptions
   } = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(2);
+  const {
+    0: open,
+    1: setOpen
+  } = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])(false);
   const handleAddOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {
     if (numOptions > 4) {
       setNumOptions(4);
@@ -198,38 +205,47 @@ const Question = () => {
 
   const displayOptions = opts => {
     return opts.map(item => {
-      return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["TextField"], {
+      return __jsx("div", {
+        key: item
+      }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextField"], {
         label: `Option ${item}`,
         type: "text",
         value: options[item].value,
-        onChange: val => handleChange(item, val),
-        key: item
-      });
+        onChange: val => handleChange(item, val)
+      }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+        onClick: () => setOpen(true)
+      }, "Add Item"));
     });
   };
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Form"], {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
+    resourceType: "Product",
+    showVariants: false,
+    open: open,
+    onSelection: () => {},
+    onCancel: () => setOpen(false)
+  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Form"], {
     noValidate: true,
     onSubmit: handleSubmit
-  }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["FormLayout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["TextField"], {
+  }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["FormLayout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextField"], {
     value: question,
     onChange: handleQuestion,
     label: "Question",
     type: "text",
     placeholder: "Which of the following do you prefer, etc"
-  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["ButtonGroup"], null, numOptions === 4 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], null, numOptions === 4 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     disabled: true
-  }, "Add Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }, "Add Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
     onClick: handleAddOption
-  }, "Add Option"), numOptions === 2 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }, "Add Option"), numOptions === 2 ? __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     secondary: true,
     disabled: true
-  }, "Remove Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_9__["Button"], {
+  }, "Remove Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     secondary: true,
     onClick: handleRemoveOption
-  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_10___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)))));
+  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Question);
@@ -377,8 +393,19 @@ const Create = () => {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Terence\Desktop\item_match\pages\create.js */"./pages/create.js");
+module.exports = __webpack_require__(/*! C:\Users\teren\Desktop\item_match\pages\create.js */"./pages/create.js");
 
+
+/***/ }),
+
+/***/ "@shopify/app-bridge-react":
+/*!********************************************!*\
+  !*** external "@shopify/app-bridge-react" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@shopify/app-bridge-react");
 
 /***/ }),
 
