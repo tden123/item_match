@@ -5,6 +5,8 @@ import {
   Form,
   FormLayout,
   Button,
+  Card,
+  Banner,
   ButtonGroup
 } from '@shopify/polaris';
 import _ from 'lodash';
@@ -86,10 +88,12 @@ const CreateQuestionForm = () => {
           {options[itemNum] ? (
             options[itemNum].items.map(item => (
               <React.Fragment key={item.title}>
-                <p>{item.title}</p>
-                <Button onClick={() => removeItemTag(itemNum, item.title)}>
-                  X
-                </Button>
+                <Banner
+                  icon=''
+                  onDismiss={() => removeItemTag(itemNum, item.title)}
+                >
+                  <p>{item.title}</p>
+                </Banner>
               </React.Fragment>
             ))
           ) : (
