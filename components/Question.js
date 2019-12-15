@@ -46,8 +46,9 @@ const Question = () => {
 
     const handleQuestion = useCallback(question => setQuestion(question), []);
     const handleSubmit = useCallback(_event => setUrl(''), []);
-    const handleChange = (item, val) =>
-        setOptions({ ...options, [item]: { value: val } });
+    const handleChange = (item, val) => {
+        setOptions({ ...options, [item]: { value: val, items: options[item].items } });
+    };
     const handleAddItemsToOption = useCallback(() => { })
 
     const displayOptions = opts => {
@@ -64,6 +65,7 @@ const Question = () => {
                         onClick={() => {
                             setOpen(true);
                             setCurrOption(item);
+                            console.log(`currOption: ${currOption}, open: ${open}`)
                         }}
                     >Add Item</Button>
                 </div>
@@ -78,16 +80,19 @@ const Question = () => {
                 resourceType="Product"
                 showVariants={false}
                 open={open}
-                onSelection={async (resources) => {
-                    const newItem = { value: options[currOption].value, items: resources.selection };
-                    await setOptions({
+                onSelection={(resources) => {
+                    setOptions({
                         ...options,
-                        [currOption]: newItem
+                        [currOption]: { value: options[currOption].value, items: resources.selection }
                     })
-                    console.log(options);
+                    setOpen(false);
+                    setCurrOption(0);
                 }
                 }
-                onCancel={() => { setOpen(false); setCurrOption(0); }}
+                onCancel={() => {
+                    setOpen(false);
+                    setCurrOption(0);
+                }}
             />
 
             <Form noValidate onSubmit={handleSubmit}>
@@ -122,6 +127,8 @@ const Question = () => {
                     </ButtonGroup>
 
                     {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}
+
+                    <Button primary onClick={() => console.log(options)}>Submit</Button>
                 </FormLayout>
             </Form>
         </Fragment>

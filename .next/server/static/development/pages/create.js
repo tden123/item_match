@@ -205,11 +205,14 @@ const Question = () => {
   const handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(question => setQuestion(question), []);
   const handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(_event => setUrl(''), []);
 
-  const handleChange = (item, val) => setOptions(_objectSpread({}, options, {
-    [item]: {
-      value: val
-    }
-  }));
+  const handleChange = (item, val) => {
+    setOptions(_objectSpread({}, options, {
+      [item]: {
+        value: val,
+        items: options[item].items
+      }
+    }));
+  };
 
   const handleAddItemsToOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {});
 
@@ -226,6 +229,7 @@ const Question = () => {
         onClick: () => {
           setOpen(true);
           setCurrOption(item);
+          console.log(`currOption: ${currOption}, open: ${open}`);
         }
       }, "Add Item"));
     });
@@ -235,15 +239,15 @@ const Question = () => {
     resourceType: "Product",
     showVariants: false,
     open: open,
-    onSelection: async resources => {
-      const newItem = {
-        value: options[currOption].value,
-        items: resources.selection
-      };
-      await setOptions(_objectSpread({}, options, {
-        [currOption]: newItem
+    onSelection: resources => {
+      setOptions(_objectSpread({}, options, {
+        [currOption]: {
+          value: options[currOption].value,
+          items: resources.selection
+        }
       }));
-      console.log(options);
+      setOpen(false);
+      setCurrOption(0);
     },
     onCancel: () => {
       setOpen(false);
@@ -270,7 +274,10 @@ const Question = () => {
   }, "Remove Option") : __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     secondary: true,
     onClick: handleRemoveOption
-  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)))));
+  }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+    primary: true,
+    onClick: () => console.log(options)
+  }, "Submit"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Question);
