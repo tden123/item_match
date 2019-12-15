@@ -1,9 +1,9 @@
-webpackHotUpdate("static\\development\\pages\\create.js",{
+webpackHotUpdate("static\\development\\pages\\create-question.js",{
 
-/***/ "./components/Question.js":
-/*!********************************!*\
-  !*** ./components/Question.js ***!
-  \********************************/
+/***/ "./components/CreateQuestionForm.js":
+/*!******************************************!*\
+  !*** ./components/CreateQuestionForm.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -50,7 +50,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-var Question = function Question() {
+var CreateQuestionForm = function CreateQuestionForm() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
     1: {
       value: '',
@@ -122,9 +122,13 @@ var Question = function Question() {
   var handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function (question) {
     return setQuestion(question);
   }, []);
-  var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function (_event) {
-    return setUrl('');
-  }, []);
+  var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {
+    var payload = {
+      question: question,
+      options: options
+    };
+    console.log(payload);
+  });
 
   var handleChange = function handleChange(item, val) {
     setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, item, {
@@ -132,8 +136,6 @@ var Question = function Question() {
       items: options[item].items
     })));
   };
-
-  var handleAddItemsToOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {});
 
   var displayOptions = function displayOptions(opts) {
     return opts.map(function (item) {
@@ -150,13 +152,12 @@ var Question = function Question() {
         onClick: function onClick() {
           setOpen(true);
           setCurrOption(item);
-          console.log("currOption: ".concat(currOption, ", open: ").concat(open));
         }
       }, "Add Item"));
     });
   };
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_8___default.a.Fragment, null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
     resourceType: "Product",
     showVariants: false,
     open: open,
@@ -195,15 +196,13 @@ var Question = function Question() {
     onClick: handleRemoveOption
   }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
-    onClick: function onClick() {
-      return console.log(options);
-    }
+    onClick: handleSubmit
   }, "Submit"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Question);
+/* harmony default export */ __webpack_exports__["default"] = (CreateQuestionForm);
 
 /***/ })
 
 })
-//# sourceMappingURL=create.js.96cd390a9a209f3684cb.hot-update.js.map
+//# sourceMappingURL=create-question.js.d498e03f80b73c6a2bce.hot-update.js.map

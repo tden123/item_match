@@ -1,8 +1,7 @@
-import React, { Fragment, useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ResourcePicker } from '@shopify/app-bridge-react';
 import {
     TextField,
-    Layout,
     Form,
     FormLayout,
     Button,
@@ -10,7 +9,7 @@ import {
 } from '@shopify/polaris';
 import _ from 'lodash';
 
-const Question = () => {
+const CreateQuestionForm = () => {
     const [options, setOptions] = useState({
         1: { value: '', items: [] },
         2: { value: '', items: [] },
@@ -45,11 +44,17 @@ const Question = () => {
     });
 
     const handleQuestion = useCallback(question => setQuestion(question), []);
-    const handleSubmit = useCallback(_event => setUrl(''), []);
+    const handleSubmit = useCallback(() => {
+        const filteredOptions = options.filter(option => option.value !== '');
+        const payload = {
+            question,
+            filteredOptions
+        }
+        console.log(payload)
+    });
     const handleChange = (item, val) => {
         setOptions({ ...options, [item]: { value: val, items: options[item].items } });
     };
-    const handleAddItemsToOption = useCallback(() => { })
 
     const displayOptions = opts => {
         return opts.map(item => {
@@ -65,7 +70,6 @@ const Question = () => {
                         onClick={() => {
                             setOpen(true);
                             setCurrOption(item);
-                            console.log(`currOption: ${currOption}, open: ${open}`)
                         }}
                     >Add Item</Button>
                 </div>
@@ -74,8 +78,7 @@ const Question = () => {
     };
 
     return (
-        <Fragment>
-
+        <React.Fragment>
             <ResourcePicker
                 resourceType="Product"
                 showVariants={false}
@@ -128,17 +131,11 @@ const Question = () => {
 
                     {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}
 
-                    <Button primary onClick={() => {
-                        const payload = {
-                            question,
-                            options
-                        }
-                        console.log(payload)
-                    }}>Submit</Button>
+                    <Button primary onClick={handleSubmit}>Submit</Button>
                 </FormLayout>
             </Form>
-        </Fragment>
+        </React.Fragment>
     );
 };
 
-export default Question;
+export default CreateQuestionForm;

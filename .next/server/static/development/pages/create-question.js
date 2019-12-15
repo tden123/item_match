@@ -88,15 +88,15 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/Question.js":
-/*!********************************!*\
-  !*** ./components/Question.js ***!
-  \********************************/
+/***/ "./components/CreateQuestionForm.js":
+/*!******************************************!*\
+  !*** ./components/CreateQuestionForm.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -144,7 +144,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-const Question = () => {
+const CreateQuestionForm = () => {
   const {
     0: options,
     1: setOptions
@@ -214,7 +214,14 @@ const Question = () => {
     }
   });
   const handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(question => setQuestion(question), []);
-  const handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(_event => setUrl(''), []);
+  const handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {
+    const filteredOptions = options.filter(option => option.value !== '');
+    const payload = {
+      question,
+      filteredOptions
+    };
+    console.log(payload);
+  });
 
   const handleChange = (item, val) => {
     setOptions(_objectSpread({}, options, {
@@ -224,8 +231,6 @@ const Question = () => {
       }
     }));
   };
-
-  const handleAddItemsToOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(() => {});
 
   const displayOptions = opts => {
     return opts.map(item => {
@@ -240,13 +245,12 @@ const Question = () => {
         onClick: () => {
           setOpen(true);
           setCurrOption(item);
-          console.log(`currOption: ${currOption}, open: ${open}`);
         }
       }, "Add Item"));
     });
   };
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_8___default.a.Fragment, null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
     resourceType: "Product",
     showVariants: false,
     open: open,
@@ -287,17 +291,11 @@ const Question = () => {
     onClick: handleRemoveOption
   }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
-    onClick: () => {
-      const payload = {
-        question,
-        options
-      };
-      console.log(payload);
-    }
+    onClick: handleSubmit
   }, "Submit"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Question);
+/* harmony default export */ __webpack_exports__["default"] = (CreateQuestionForm);
 
 /***/ }),
 
@@ -408,10 +406,10 @@ function _defineProperty(obj, key, value) {
 
 /***/ }),
 
-/***/ "./pages/create.js":
-/*!*************************!*\
-  !*** ./pages/create.js ***!
-  \*************************/
+/***/ "./pages/create-question.js":
+/*!**********************************!*\
+  !*** ./pages/create-question.js ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -421,28 +419,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Question__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Question */ "./components/Question.js");
+/* harmony import */ var _components_CreateQuestionForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/CreateQuestionForm */ "./components/CreateQuestionForm.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
-const Create = () => {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Page"], null, __jsx(_components_Question__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+const Question = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Page"], null, __jsx(_components_CreateQuestionForm__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Create);
+/* harmony default export */ __webpack_exports__["default"] = (Question);
 
 /***/ }),
 
-/***/ 3:
-/*!*******************************!*\
-  !*** multi ./pages/create.js ***!
-  \*******************************/
+/***/ 4:
+/*!****************************************!*\
+  !*** multi ./pages/create-question.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\teren\Desktop\item_match\pages\create.js */"./pages/create.js");
+module.exports = __webpack_require__(/*! C:\Users\teren\Desktop\item_match\pages\create-question.js */"./pages/create-question.js");
 
 
 /***/ }),
@@ -569,4 +567,4 @@ module.exports = require("react");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=create.js.map
+//# sourceMappingURL=create-question.js.map

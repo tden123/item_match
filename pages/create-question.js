@@ -1,22 +1,17 @@
 import React, { Fragment, useState, useCallback } from 'react';
 import {
-  Form,
-  FormLayout,
-  TextField,
-  Page,
-  Layout,
-  Button
+  Page
 } from '@shopify/polaris';
-import Question from '../components/Question';
+import CreateQuestionForm from '../components/CreateQuestionForm';
 
-const Create = () => {
+const Question = () => {
   return (
     <Fragment>
       <Page>
-        <Question />
+        <CreateQuestionForm />
       </Page>
     </Fragment>
   );
 };
 
-export default Create;
+export default Question;

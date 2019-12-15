@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\create.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\create-question.js"],{
 
-/***/ "./components/Question.js":
-/*!********************************!*\
-  !*** ./components/Question.js ***!
-  \********************************/
+/***/ "./components/CreateQuestionForm.js":
+/*!******************************************!*\
+  !*** ./components/CreateQuestionForm.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -50,7 +50,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-var Question = function Question() {
+var CreateQuestionForm = function CreateQuestionForm() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
     1: {
       value: '',
@@ -122,9 +122,16 @@ var Question = function Question() {
   var handleQuestion = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function (question) {
     return setQuestion(question);
   }, []);
-  var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function (_event) {
-    return setUrl('');
-  }, []);
+  var handleSubmit = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {
+    var filteredOptions = options.filter(function (option) {
+      return option.value !== '';
+    });
+    var payload = {
+      question: question,
+      filteredOptions: filteredOptions
+    };
+    console.log(payload);
+  });
 
   var handleChange = function handleChange(item, val) {
     setOptions(_objectSpread({}, options, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, item, {
@@ -132,8 +139,6 @@ var Question = function Question() {
       items: options[item].items
     })));
   };
-
-  var handleAddItemsToOption = Object(react__WEBPACK_IMPORTED_MODULE_8__["useCallback"])(function () {});
 
   var displayOptions = function displayOptions(opts) {
     return opts.map(function (item) {
@@ -150,13 +155,12 @@ var Question = function Question() {
         onClick: function onClick() {
           setOpen(true);
           setCurrOption(item);
-          console.log("currOption: ".concat(currOption, ", open: ").concat(open));
         }
       }, "Add Item"));
     });
   };
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_8___default.a.Fragment, null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["ResourcePicker"], {
     resourceType: "Product",
     showVariants: false,
     open: open,
@@ -195,17 +199,11 @@ var Question = function Question() {
     onClick: handleRemoveOption
   }, "Remove Option")), displayOptions(lodash__WEBPACK_IMPORTED_MODULE_11___default.a.range(1, _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_6___default()(numOptions, 10) + 1)), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
     primary: true,
-    onClick: function onClick() {
-      var payload = {
-        question: question,
-        options: options
-      };
-      console.log(payload);
-    }
+    onClick: handleSubmit
   }, "Submit"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Question);
+/* harmony default export */ __webpack_exports__["default"] = (CreateQuestionForm);
 
 /***/ }),
 
@@ -61890,21 +61888,21 @@ module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js!./":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate-question&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate-question.js!./":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate-question&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate-question.js ***!
+  \****************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/create", function() {
-      var mod = __webpack_require__(/*! ./pages/create.js */ "./pages/create.js")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/create-question", function() {
+      var mod = __webpack_require__(/*! ./pages/create-question.js */ "./pages/create-question.js")
       if(true) {
-        module.hot.accept(/*! ./pages/create.js */ "./pages/create.js", function() {
-          if(!next.router.components["/create"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/create.js */ "./pages/create.js")
-          next.router.update("/create", updatedPage)
+        module.hot.accept(/*! ./pages/create-question.js */ "./pages/create-question.js", function() {
+          if(!next.router.components["/create-question"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/create-question.js */ "./pages/create-question.js")
+          next.router.update("/create-question", updatedPage)
         })
       }
       return mod
@@ -63330,10 +63328,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./pages/create.js":
-/*!*************************!*\
-  !*** ./pages/create.js ***!
-  \*************************/
+/***/ "./pages/create-question.js":
+/*!**********************************!*\
+  !*** ./pages/create-question.js ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -63342,28 +63340,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @shopify/polaris */ "./node_modules/@shopify/polaris/index.es.js");
-/* harmony import */ var _components_Question__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Question */ "./components/Question.js");
+/* harmony import */ var _components_CreateQuestionForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/CreateQuestionForm */ "./components/CreateQuestionForm.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
-var Create = function Create() {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Page"], null, __jsx(_components_Question__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+var Question = function Question() {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Page"], null, __jsx(_components_CreateQuestionForm__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Create);
+/* harmony default export */ __webpack_exports__["default"] = (Question);
 
 /***/ }),
 
-/***/ 1:
-/*!**************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js ***!
-  \**************************************************************************************************************************************/
+/***/ 2:
+/*!********************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fcreate-question&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate-question.js ***!
+  \********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fcreate-question&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate-question.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcreate-question&absolutePagePath=C%3A%5CUsers%5Cteren%5CDesktop%5Citem_match%5Cpages%5Ccreate-question.js!./");
 
 
 /***/ }),
@@ -63379,5 +63377,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=create.js.map
+},[[2,"static/runtime/webpack.js"]]]);
+//# sourceMappingURL=create-question.js.map
