@@ -50,8 +50,8 @@ const CreateQuestionForm = () => {
 
   const handleSubmit = useCallback(async () => {
     const payload = {
-      name: question,
-      items: options
+      question,
+      options
     };
     await axios.post('/api/question/create', payload);
   });
