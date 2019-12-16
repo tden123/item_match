@@ -5,4 +5,4 @@ const QuestionSchema = mongoose.Schema({
     items: {}
 });
 
-module.exports = QuestionSchema = mongoose.model('question', QuestionSchema);
+module.exports = Question = mongoose.model('question', QuestionSchema);
