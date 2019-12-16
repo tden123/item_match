@@ -1,24 +1,24 @@
-require("isomorphic-fetch");
-const Koa = require("koa");
-const next = require("next");
-const dotenv = require("dotenv");
-const { default: createShopifyAuth } = require("@shopify/koa-shopify-auth");
-const { verifyRequest } = require("@shopify/koa-shopify-auth");
-const session = require("koa-session");
+require('isomorphic-fetch');
+const Koa = require('koa');
+const next = require('next');
+const dotenv = require('dotenv');
+const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
+const { verifyRequest } = require('@shopify/koa-shopify-auth');
+const session = require('koa-session');
 const connectDB = require('./db');
 const bodyParser = require('koa-bodyparser');
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const { SHOPIFY_API_KEY, SHOPIFY_API_SECRET_KEY } = process.env;
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = new Koa();
-  connectDB();
+  await connectDB();
 
   server.use(bodyParser());
 
@@ -32,11 +32,11 @@ app.prepare().then(() => {
     createShopifyAuth({
       apiKey: SHOPIFY_API_KEY,
       secret: SHOPIFY_API_SECRET_KEY,
-      scopes: ["read_products"],
+      scopes: ['read_products'],
       async afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
-        ctx.cookies.set("shopOrigin", shop, { httpOnly: false });
-        ctx.redirect("/");
+        ctx.cookies.set('shopOrigin', shop, { httpOnly: false });
+        ctx.redirect('/');
       }
     })
   );
