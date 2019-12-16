@@ -66,13 +66,11 @@ const CreateQuestionForm = () => {
 
   const removeItemTag = (item, title) => {
     const items = options[item].items.filter(i => i.title !== title);
-    console.log(items);
     const value = options[item].value;
     setOptions({
       ...options,
       [item]: { value, items }
     });
-    console.log(options);
   };
 
   const displayOptions = opts => {
@@ -83,7 +81,7 @@ const CreateQuestionForm = () => {
             label={`Option ${itemNum}`}
             type='text'
             value={options[itemNum] ? options[itemNum].value : ''}
-            onChange={val => handleChange(itemNum, val)}
+            onChange={value => handleChange(itemNum, value)}
           />
           {options[itemNum] ? (
             options[itemNum].items.map(item => (
