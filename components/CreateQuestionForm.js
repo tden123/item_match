@@ -53,8 +53,7 @@ const CreateQuestionForm = () => {
       name: question,
       items: options
     };
-    console.log(payload);
-    await axios.get('/api/question');
+    await axios.post('/api/question/create', payload);
   });
 
   const handleChange = (item, value) => {
