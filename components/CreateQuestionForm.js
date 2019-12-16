@@ -5,11 +5,11 @@ import {
   Form,
   FormLayout,
   Button,
-  Card,
   Banner,
   ButtonGroup
 } from '@shopify/polaris';
 import _ from 'lodash';
+import axios from 'axios';
 
 const CreateQuestionForm = () => {
   const [options, setOptions] = useState({});
@@ -48,12 +48,12 @@ const CreateQuestionForm = () => {
 
   const handleQuestion = useCallback(question => setQuestion(question), []);
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     const payload = {
-      question,
-      options
+      name: question,
+      items: options
     };
-    console.log(payload);
+    await axios.post('/api/question/create', payload);
   });
 
   const handleChange = (item, value) => {
@@ -95,8 +95,8 @@ const CreateQuestionForm = () => {
               </React.Fragment>
             ))
           ) : (
-            <div />
-          )}
+              <div />
+            )}
           <Button
             onClick={() => {
               setOpen(true);
@@ -148,20 +148,20 @@ const CreateQuestionForm = () => {
                 Add Option
               </Button>
             ) : (
-              <Button primary onClick={handleAddOption}>
-                Add Option
+                <Button primary onClick={handleAddOption}>
+                  Add Option
               </Button>
-            )}
+              )}
 
             {numOptions === 2 ? (
               <Button secondary disabled>
                 Remove Option
               </Button>
             ) : (
-              <Button secondary onClick={handleRemoveOption}>
-                Remove Option
+                <Button secondary onClick={handleRemoveOption}>
+                  Remove Option
               </Button>
-            )}
+              )}
           </ButtonGroup>
 
           {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}

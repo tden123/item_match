@@ -5,8 +5,8 @@ const dotenv = require("dotenv");
 const { default: createShopifyAuth } = require("@shopify/koa-shopify-auth");
 const { verifyRequest } = require("@shopify/koa-shopify-auth");
 const session = require("koa-session");
-const Router = require("koa-router");
 const connectDB = require('./db');
+const bodyParser = require('koa-bodyparser');
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -16,11 +16,15 @@ const handle = app.getRequestHandler();
 
 const { SHOPIFY_API_KEY, SHOPIFY_API_SECRET_KEY } = process.env;
 
-connectDB();
-
 app.prepare().then(() => {
   const server = new Koa();
-  const router = new Router();
+  connectDB();
+
+  server.use(bodyParser());
+
+  const router = require('./routes');
+  server.use(router.routes(), router.allowedMethods());
+
   server.use(session(server));
   server.keys = [SHOPIFY_API_SECRET_KEY];
 
@@ -31,27 +35,6 @@ app.prepare().then(() => {
       scopes: ["read_products"],
       async afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
-
-        console.log(`access token: ${accessToken}`);
-
-        const store_body = {
-          "storefront_access_token": {
-            "title": "Test"
-          }
-        };
-
-        const storefront_token = await fetch(
-          "https://1a32002e.ngrok.io/admin/api/2019-10/storefront_access_tokens.json",
-          {
-            method: "POST",
-            body: JSON.stringify(store_body),
-            headers: {
-              "Content-type": "application/json",
-              "X-Shopify-Storefront-Access-Token": accessToken
-            }
-          }
-        );
-
         ctx.cookies.set("shopOrigin", shop, { httpOnly: false });
         ctx.redirect("/");
       }
