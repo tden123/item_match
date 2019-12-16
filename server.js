@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const { default: createShopifyAuth } = require("@shopify/koa-shopify-auth");
 const { verifyRequest } = require("@shopify/koa-shopify-auth");
 const session = require("koa-session");
-const Router = require("koa-router");
 const connectDB = require('./db');
 
 dotenv.config();
@@ -15,8 +14,6 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const { SHOPIFY_API_KEY, SHOPIFY_API_SECRET_KEY } = process.env;
-
-
 
 app.prepare().then(() => {
   const server = new Koa();

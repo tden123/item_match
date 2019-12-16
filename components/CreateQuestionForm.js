@@ -5,13 +5,11 @@ import {
   Form,
   FormLayout,
   Button,
-  Card,
   Banner,
   ButtonGroup
 } from '@shopify/polaris';
 import _ from 'lodash';
-import Question from '../models/Question';
-import Axios from 'axios';
+import axios from 'axios';
 
 const CreateQuestionForm = () => {
   const [options, setOptions] = useState({});
@@ -56,6 +54,7 @@ const CreateQuestionForm = () => {
       items: options
     };
     console.log(payload);
+    await axios.get('/api/question');
   });
 
   const handleChange = (item, value) => {
