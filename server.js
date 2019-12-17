@@ -37,11 +37,27 @@ app.prepare().then(async () => {
       scopes: ['read_products'],
       async afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
+
+        const user = await User.findOne({ shop });
+
+        if (!user) {
+          const salt = await bcrypt.genSalt(10);
+          const token = await bcrypt.hash(accessToken, salt);
+          const newUser = await new User({ shop, token, questions: [] });
+          await newUser.save();
+        } else {
+          const isMatch = bcrypt.compare(accessToken, user.accessToken);
+          if (!isMatch) {
+            console.error('Invalid token');
+            return;
+          }
+        }
+
         ctx.cookies.set('shopOrigin', shop, { httpOnly: false });
         ctx.redirect('/');
       }
-    })
-  );
+
+    }));
 
   server.use(verifyRequest());
   server.use(async ctx => {
