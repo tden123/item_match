@@ -36,15 +36,6 @@ app.prepare().then(async () => {
       scopes: ['read_products'],
       async afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
-        console.log(`shop: ${shop}`);
-        console.log(`accessToken: ${accessToken}`);
-
-        const salt = await bcrypt.genSalt(10);
-        const token = await bcrypt.hash(accessToken, salt);
-
-        console.log(`encryptedToken: ${token}`);
-
-        ctx.cookies.set('token', token, { httpOnly: false });
         ctx.cookies.set('shopOrigin', shop, { httpOnly: false });
         ctx.redirect('/');
       }
