@@ -16,9 +16,9 @@ const handle = app.getRequestHandler();
 
 const { SHOPIFY_API_KEY, SHOPIFY_API_SECRET_KEY } = process.env;
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = new Koa();
-  connectDB();
+  await connectDB();
 
   server.use(bodyParser());
 
