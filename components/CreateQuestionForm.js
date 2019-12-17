@@ -71,7 +71,6 @@ const CreateQuestionForm = () => {
       ...options,
       [item]: { value, items }
     });
-    console.log(options);
   };
 
   const displayOptions = opts => {
@@ -82,7 +81,7 @@ const CreateQuestionForm = () => {
             label={`Option ${itemNum}`}
             type='text'
             value={options[itemNum] ? options[itemNum].value : ''}
-            onChange={val => handleChange(itemNum, val)}
+            onChange={value => handleChange(itemNum, value)}
           />
           {options[itemNum] ? (
             options[itemNum].items.map(item => (
