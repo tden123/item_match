@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Question = require('./Question');
 
 const UserSchema = mongoose.Schema({
-  shopName: String,
+  shop: String,
+  accessToken: String,
   questions: [mongoose.Schema.Types.Mixed]
 });
 

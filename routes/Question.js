@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const router = new Router({ prefix: '/question' });
 const Question = require('../models/Question');
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
 
 // @route   POST api/question/create
@@ -9,30 +10,36 @@ const User = require('../models/User');
 // @access  Private
 router.post('/create', async (ctx, next) => {
   const { question, options } = ctx.request.body;
-  const { cookie } = ctx.request.header;
 
-  const shopName = cookie
-    .match(/shopOrigin=\w+-\w+.myshopify.com/)[0]
-    .slice(11);
+  console.log(ctx.session);
 
-  if (!shopName) {
+  const shop = ctx.session.shop;
+
+  if (!shop) {
     return "Shop not found...";
   }
 
   try {
-    const user = await User.findOne({ shopName });
+    const user = await User.findOne({ shop });
 
     const newQuestion = await new Question({ question, options });
 
     if (!user) {
-      const newUser = await new User({ shopName, questions: [] });
+      const salt = await bcrypt.genSalt(10);
+      const accessToken = await bcrypt.hash(ctx.session.accessToken, salt);
+      const newUser = await new User({ shop, accessToken, questions: [] });
       newUser.questions.push(newQuestion);
       await newUser.save();
     } else {
+      const isMatch = bcrypt.compare(ctx.session.accessToken, user.accessToken);
+      if (!isMatch) {
+        console.error('Invalid token');
+        return;
+      }
       user.questions.push(newQuestion);
       await user.save();
     }
-    console.log(`new question added to ${shopName}!`);
+    console.log(`new question added to ${shop}!`);
     ctx.redirect('/create-question');
   } catch (error) {
     console.error(error.message);

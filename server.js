@@ -8,6 +8,7 @@ const session = require('koa-session');
 const connectDB = require('./db');
 const bodyParser = require('koa-bodyparser');
 const bcrypt = require('bcryptjs');
+const User = require('./models/User');
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 3000;
