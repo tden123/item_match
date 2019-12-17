@@ -21,9 +21,9 @@ router.post('/create', async (ctx, next) => {
   } catch (error) {
     console.error(error.message);
   }
-
   await next();
 });
+
 
 // @route   GET api/question
 // @desc    Create a new question and store in user
@@ -31,6 +31,7 @@ router.post('/create', async (ctx, next) => {
 router.get('/', async (ctx, next) => {
   const user = await User.findOne({ shop: ctx.session.shop });
   console.log(user);
+  ctx.response = user;
   await next();
 });
 

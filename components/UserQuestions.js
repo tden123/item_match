@@ -6,8 +6,8 @@ export const UserQuestions = () => {
 
     const handleData = useCallback(async () => {
         try {
-            await axios.get('/api/question');
-            //console.log(questions);
+            const questions = await axios.get('/api/question');
+            console.log(questions);
         } catch (error) {
             console.error(error.message);
         }

@@ -39,14 +39,14 @@ app.prepare().then(async () => {
         const { shop, accessToken } = ctx.session;
 
         const user = await User.findOne({ shop });
-
         if (!user) {
           const salt = await bcrypt.genSalt(10);
           const token = await bcrypt.hash(accessToken, salt);
           const newUser = await new User({ shop, token, questions: [] });
           await newUser.save();
         } else {
-          const isMatch = bcrypt.compare(accessToken, user.accessToken);
+          const isMatch = await bcrypt.compare(accessToken, user.token);
+          console.log(`accessToken: ${accessToken}, hashedToken: ${user.token}`);
           if (!isMatch) {
             console.error('Invalid token');
             return;
