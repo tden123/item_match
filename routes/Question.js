@@ -21,13 +21,17 @@ router.post('/create', async (ctx, next) => {
   } catch (error) {
     console.error(error.message);
   }
+
+  await next();
 });
 
-// @route   GET api/question/create
+// @route   GET api/question
 // @desc    Create a new question and store in user
 // @access  Private
-router.post('/create', async (ctx, next) => {
-  console.log('get questions')
+router.get('/', async (ctx, next) => {
+  const user = await User.findOne({ shop: ctx.session.shop });
+  console.log(user);
+  await next();
 });
 
 module.exports = router;
