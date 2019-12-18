@@ -4,7 +4,6 @@ const Question = require('../models/Question');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
-
 // @route   POST api/question/create
 // @desc    Create a new question and store in user
 // @access  Private
@@ -21,18 +20,14 @@ router.post('/create', async (ctx, next) => {
   } catch (error) {
     console.error(error.message);
   }
-  await next();
 });
-
 
 // @route   GET api/question
 // @desc    Create a new question and store in user
 // @access  Private
 router.get('/', async (ctx, next) => {
   const user = await User.findOne({ shop: ctx.session.shop });
-  console.log(user);
-  ctx.response = user;
-  await next();
+  ctx.body = user;
 });
 
 module.exports = router;

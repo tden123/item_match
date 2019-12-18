@@ -1,23 +1,26 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { Button } from '@shopify/polaris';
 import axios from 'axios';
 
 export const UserQuestions = () => {
+  const [questions, setQuestions] = useState([]);
 
-    const handleData = useCallback(async () => {
-        try {
-            const questions = await axios.get('/api/question');
-            console.log(questions);
-        } catch (error) {
-            console.error(error.message);
-        }
-    });
+  useEffect(() => {
+    handleData();
+  }, []);
 
-    return (
-        <Fragment>
-            <Button onClick={handleData}>
-                Get Data
-            </Button>
-        </Fragment>
-    )
-}
+  const handleData = useCallback(async () => {
+    try {
+      const user = await axios.get('/api/question');
+      setQuestions(user.data.questions);
+    } catch (error) {
+      console.error(error.message);
+    }
+  });
+
+  const displayQuestions = questions.map(q => {
+    return <div key={q._id}>{q.question}</div>;
+  });
+
+  return <Fragment>{displayQuestions}</Fragment>;
+};

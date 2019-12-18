@@ -3,7 +3,6 @@ const Question = require('./Question');
 
 const UserSchema = mongoose.Schema({
   shop: String,
-  token: String,
   questions: [mongoose.Schema.Types.Mixed]
 });
 
