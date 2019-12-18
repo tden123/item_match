@@ -95,8 +95,8 @@ const CreateQuestionForm = () => {
               </React.Fragment>
             ))
           ) : (
-              <div />
-            )}
+            <div />
+          )}
           <Button
             onClick={() => {
               setOpen(true);
@@ -148,20 +148,20 @@ const CreateQuestionForm = () => {
                 Add Option
               </Button>
             ) : (
-                <Button primary onClick={handleAddOption}>
-                  Add Option
+              <Button primary onClick={handleAddOption}>
+                Add Option
               </Button>
-              )}
+            )}
 
             {numOptions === 2 ? (
               <Button secondary disabled>
                 Remove Option
               </Button>
             ) : (
-                <Button secondary onClick={handleRemoveOption}>
-                  Remove Option
+              <Button secondary onClick={handleRemoveOption}>
+                Remove Option
               </Button>
-              )}
+            )}
           </ButtonGroup>
 
           {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}

@@ -1,5 +1,4 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { Button } from '@shopify/polaris';
 import axios from 'axios';
 
 export const UserQuestions = () => {
@@ -7,7 +6,7 @@ export const UserQuestions = () => {
 
   useEffect(() => {
     handleData();
-  }, []);
+  }, [questions]);
 
   const handleData = useCallback(async () => {
     try {

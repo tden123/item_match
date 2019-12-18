@@ -2,7 +2,6 @@ const Router = require('koa-router');
 const router = new Router({ prefix: '/question' });
 const Question = require('../models/Question');
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
 
 // @route   POST api/question/create
 // @desc    Create a new question and store in user
@@ -17,6 +16,8 @@ router.post('/create', async (ctx, next) => {
     user.questions.push(newQuestion);
     await user.save();
     console.log(`new question added to ${shop}!`);
+    ctx.respond = false;
+    ctx.res.statusCode = 200;
   } catch (error) {
     console.error(error.message);
   }
