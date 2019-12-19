@@ -8,102 +8,69 @@ import {
   Card,
   TextStyle
 } from '@shopify/polaris';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CreateQuiz = () => {
+  useEffect(() => {
+    getItems();
+  }, []);
+
   const [selectedItems, setSelectedItems] = useState([]);
+  const [questions, setQuestions] = useState([]);
 
   const resourceName = {
-    singular: 'customer',
-    plural: 'customers'
+    singular: 'Quiz',
+    plural: 'Quizes'
   };
 
-  const items = [
-    {
-      id: 341,
-      url: 'customers/341',
-      name: 'Mae Jemison',
-      location: 'Decatur, USA'
-    },
-    {
-      id: 256,
-      url: 'customers/256',
-      name: 'Ellen Ochoa',
-      location: 'Los Angeles, USA'
-    }
-  ];
-
-  const promotedBulkActions = [
-    {
-      content: 'Edit customers',
-      onAction: () => console.log('Todo: implement bulk edit')
-    }
-  ];
-
-  const bulkActions = [
-    {
-      content: 'Add tags',
-      onAction: () => console.log('Todo: implement bulk add tags')
-    },
-    {
-      content: 'Remove tags',
-      onAction: () => console.log('Todo: implement bulk remove tags')
-    },
-    {
-      content: 'Delete customers',
-      onAction: () => console.log('Todo: implement bulk delete')
-    }
-  ];
+  const getItems = async () => {
+    const user = await axios.get('/api/question');
+    setQuestions(user.data.questions);
+  };
 
   function renderItem(item) {
-    const { id, url, name, location } = item;
-    //const media = <Avatar customer size='medium' name={name} />;
-
+    const { question, _id } = item;
     return (
-      <ResourceItem
-        id={id}
-        url={url}
-        //media={media}
-        accessibilityLabel={`View details for ${name}`}
-      >
+      <ResourceItem id={_id}>
         <h3>
-          <TextStyle variation='strong'>{name}</TextStyle>
+          <TextStyle variation='strong'>{question}</TextStyle>
         </h3>
-        <div>{location}</div>
       </ResourceItem>
     );
   }
 
-  return (
+  return questions.length > 0 ? (
     <Fragment>
       <Form noValidate onSubmit={() => {}}>
         <FormLayout>
           <TextField
             value={''}
             onChange={() => {}}
-            label='Question'
+            label='Create Quiz'
             type='text'
-            placeholder='Which of the following do you prefer, etc'
+            placeholder='Find Shoe Quiz...'
           />
 
           <Card>
             <ResourceList
               resourceName={resourceName}
-              items={items}
+              items={questions}
               renderItem={renderItem}
               selectedItems={selectedItems}
               onSelectionChange={setSelectedItems}
-              promotedBulkActions={promotedBulkActions}
-              bulkActions={bulkActions}
+              selectable
             />
           </Card>
 
           <Button primary submit>
-            Submit
+            Add to Quiz
           </Button>
         </FormLayout>
       </Form>
     </Fragment>
+  ) : (
+    <Fragment>Loading...</Fragment>
   );
 };
 

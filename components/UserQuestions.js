@@ -6,11 +6,12 @@ export const UserQuestions = () => {
 
   useEffect(() => {
     handleData();
-  }, [questions]);
+  }, []);
 
   const handleData = useCallback(async () => {
     try {
       const user = await axios.get('/api/question');
+      console.log(user);
       setQuestions(user.data.questions);
     } catch (error) {
       console.error(error.message);
