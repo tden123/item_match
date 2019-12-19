@@ -25,8 +25,13 @@ const CreateQuiz = () => {
   };
 
   const getItems = async () => {
-    const user = await axios.get('/api/question');
+    let user = await axios.get('/api/question');
+    console.log(user);
     setQuestions(user.data.questions);
+  };
+
+  const handleSubmit = async () => {
+    await axios.post('/api/quiz/create_quiz', selectedItems);
   };
 
   function renderItem(item) {
@@ -42,7 +47,7 @@ const CreateQuiz = () => {
 
   return questions.length > 0 ? (
     <Fragment>
-      <Form noValidate onSubmit={() => {}}>
+      <Form noValidate onSubmit={handleSubmit}>
         <FormLayout>
           <TextField
             value={''}

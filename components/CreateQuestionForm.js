@@ -61,7 +61,7 @@ const CreateQuestionForm = () => {
       options
     };
     resetState();
-    await axios.post('/api/question/create', payload);
+    await axios.post('/api/question/create_question', payload);
   });
 
   const handleChange = (item, value) => {

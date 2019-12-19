@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-const Question = require('./Question');
 
-const UserSchema = mongoose.Schema({
+let UserSchema = null;
+
+UserSchema = mongoose.Schema({
   shop: String,
-  questions: [mongoose.Schema.Types.Mixed]
+  questions: [{ type: mongoose.Schema.Types.Object, ref: 'question' }],
+  quizes: [{ type: mongoose.Schema.Types.Object, ref: 'quiz' }]
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

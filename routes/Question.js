@@ -6,13 +6,14 @@ const User = require('../models/User');
 // @route   POST api/question/create
 // @desc    Create a new question and store in user
 // @access  Private
-router.post('/create', async (ctx, next) => {
-  const { question, options } = ctx.request.body;
-  const shop = ctx.session.shop;
+router.post('/create_question', async (ctx, next) => {
+  let { question, options } = ctx.request.body;
+  let shop = ctx.session.shop;
 
   try {
-    const user = await User.findOne({ shop });
-    const newQuestion = await new Question({ question, options });
+    let user = await User.findOne({ shop });
+    let newQuestion = await new Question({ question, options });
+    await newQuestion.save();
     user.questions.push(newQuestion);
     await user.save();
     console.log(`new question added to ${shop}!`);
@@ -27,8 +28,17 @@ router.post('/create', async (ctx, next) => {
 // @desc    Create a new question and store in user
 // @access  Private
 router.get('/', async (ctx, next) => {
-  const user = await User.findOne({ shop: ctx.session.shop });
-  ctx.body = user;
+  try {
+    ctx.body = await User.findOne({ shop: ctx.session.shop });
+  } catch (error) {
+    console.error(error.message);
+    ctx.body = {
+      _id: 1,
+      questions: [],
+      quizes: [],
+      shop: 'Not Found'
+    };
+  }
 });
 
 module.exports = router;
