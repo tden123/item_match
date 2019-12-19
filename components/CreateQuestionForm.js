@@ -18,6 +18,13 @@ const CreateQuestionForm = () => {
   const [open, setOpen] = useState(false);
   const [currOption, setCurrOption] = useState(0);
 
+  const resetState = () => {
+    setOptions({});
+    setQuestion('');
+    setNumOptions(2);
+    setCurrOption(0);
+  };
+
   const handleAddOption = useCallback(() => {
     if (numOptions >= 4) {
       setNumOptions(4);
@@ -53,6 +60,7 @@ const CreateQuestionForm = () => {
       question,
       options
     };
+    resetState();
     await axios.post('/api/question/create', payload);
   });
 
@@ -166,7 +174,7 @@ const CreateQuestionForm = () => {
 
           {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}
 
-          <Button primary onClick={handleSubmit}>
+          <Button primary submit>
             Submit
           </Button>
         </FormLayout>
