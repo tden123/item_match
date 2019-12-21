@@ -10,8 +10,13 @@ import {
 } from '@shopify/polaris';
 import _ from 'lodash';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { createQuestion } from '../redux/actions/questions';
+import PropTypes from 'prop-types';
 
-const CreateQuestionForm = () => {
+const CreateQuestion = ({
+  createQuestion
+}) => {
   const [options, setOptions] = useState({});
   const [question, setQuestion] = useState('');
   const [numOptions, setNumOptions] = useState(2);
@@ -56,12 +61,8 @@ const CreateQuestionForm = () => {
   const handleQuestion = useCallback(question => setQuestion(question), []);
 
   const handleSubmit = useCallback(async () => {
-    const payload = {
-      question,
-      options
-    };
     resetState();
-    await axios.post('/api/question/create_question', payload);
+    createQuestion(question, options);
   });
 
   const handleChange = (item, value) => {
@@ -103,8 +104,8 @@ const CreateQuestionForm = () => {
               </React.Fragment>
             ))
           ) : (
-            <div />
-          )}
+              <div />
+            )}
           <Button
             onClick={() => {
               setOpen(true);
@@ -156,20 +157,20 @@ const CreateQuestionForm = () => {
                 Add Option
               </Button>
             ) : (
-              <Button primary onClick={handleAddOption}>
-                Add Option
+                <Button primary onClick={handleAddOption}>
+                  Add Option
               </Button>
-            )}
+              )}
 
             {numOptions === 2 ? (
               <Button secondary disabled>
                 Remove Option
               </Button>
             ) : (
-              <Button secondary onClick={handleRemoveOption}>
-                Remove Option
+                <Button secondary onClick={handleRemoveOption}>
+                  Remove Option
               </Button>
-            )}
+              )}
           </ButtonGroup>
 
           {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}
@@ -183,4 +184,12 @@ const CreateQuestionForm = () => {
   );
 };
 
-export default CreateQuestionForm;
+CreateQuestion.propTypes = {
+  createQuestion: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+  questions: state.questions
+})
+
+export default connect(mapStateToProps, { createQuestion })(CreateQuestion);

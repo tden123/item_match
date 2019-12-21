@@ -2,14 +2,14 @@ import React, { Fragment, useState, useCallback } from 'react';
 import {
   Page
 } from '@shopify/polaris';
-import CreateQuestionForm from '../components/CreateQuestionForm';
+import CreateQuestion from '../components/CreateQuestion';
 import { UserQuestions } from '../components/UserQuestions';
 
 const Question = () => {
   return (
     <Fragment>
       <Page>
-        <CreateQuestionForm />
+        <CreateQuestion />
         <UserQuestions />
       </Page>
     </Fragment>
