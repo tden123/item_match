@@ -1,2 +1,0 @@
-export const CREATE_QUESTION = 'CREATE_QUESTION';
-export const CREATE_QUIZ = 'CREATE_QUIZ';

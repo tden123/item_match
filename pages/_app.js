@@ -6,8 +6,6 @@ import { Provider } from '@shopify/app-bridge-react';
 import "@shopify/polaris/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
 import Cookies from 'js-cookie';
-import { Provider as ReduxProvider } from 'react-redux';
-import store from '../redux/store';
 
 
 class MyApp extends App {
@@ -25,13 +23,12 @@ class MyApp extends App {
           <title>Item Bundler</title>
           <meta charSet="utf-8" />
         </Head>
-        <ReduxProvider store={store}>
-          <Provider config={config}>
-            <AppProvider i18n={translations}>
-              <Component {...pageProps} />
-            </AppProvider>
-          </Provider>
-        </ReduxProvider>
+
+        <Provider config={config}>
+          <AppProvider i18n={translations}>
+            <Component {...pageProps} />
+          </AppProvider>
+        </Provider>
 
       </Fragment>
     );

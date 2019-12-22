@@ -10,13 +10,8 @@ import {
 } from '@shopify/polaris';
 import _ from 'lodash';
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { createQuestion } from '../redux/actions/questions';
-import PropTypes from 'prop-types';
 
-const CreateQuestion = ({
-  createQuestion
-}) => {
+const CreateQuestion = () => {
   const [options, setOptions] = useState({});
   const [question, setQuestion] = useState('');
   const [numOptions, setNumOptions] = useState(2);
@@ -62,7 +57,7 @@ const CreateQuestion = ({
 
   const handleSubmit = useCallback(async () => {
     resetState();
-    createQuestion(question, options);
+    await axios.post('/api/question/create_question', { question, options });
   });
 
   const handleChange = (item, value) => {
@@ -184,12 +179,4 @@ const CreateQuestion = ({
   );
 };
 
-CreateQuestion.propTypes = {
-  createQuestion: PropTypes.func.isRequired
-}
-
-const mapStateToProps = state => ({
-  questions: state.questions
-})
-
-export default connect(mapStateToProps, { createQuestion })(CreateQuestion);
+export default CreateQuestion;

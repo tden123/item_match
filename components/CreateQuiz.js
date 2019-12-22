@@ -18,10 +18,11 @@ const CreateQuiz = () => {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [quizName, setQuizName] = useState('');
 
   const resourceName = {
-    singular: 'Quiz',
-    plural: 'Quizes'
+    singular: 'Question',
+    plural: 'Questions'
   };
 
   const getItems = async () => {
@@ -31,7 +32,7 @@ const CreateQuiz = () => {
   };
 
   const handleSubmit = async () => {
-    await axios.post('/api/quiz/create_quiz', selectedItems);
+    await axios.post('/api/quiz/create_quiz', { selectedItems, quizName });
   };
 
   function renderItem(item) {
@@ -50,8 +51,8 @@ const CreateQuiz = () => {
       <Form noValidate onSubmit={handleSubmit}>
         <FormLayout>
           <TextField
-            value={''}
-            onChange={() => {}}
+            value={quizName}
+            onChange={value => setQuizName(value)}
             label='Create Quiz'
             type='text'
             placeholder='Find Shoe Quiz...'
@@ -69,14 +70,14 @@ const CreateQuiz = () => {
           </Card>
 
           <Button primary submit>
-            Add to Quiz
+            Create Quiz
           </Button>
         </FormLayout>
       </Form>
     </Fragment>
   ) : (
-    <Fragment>Loading...</Fragment>
-  );
+      <Fragment>Loading...</Fragment>
+    );
 };
 
 export default CreateQuiz;

@@ -9,11 +9,16 @@ const Quiz = require('../models/Quiz');
 // @access  Private
 router.post('/create_quiz', async (ctx, next) => {
   //const user = await User.findOne({ shop: ctx.session.shop });
-  const newQuiz = await new Quiz({ name: 'new quiz', questions: [] });
 
-  ctx.request.body.map(async _id => {
+  const { quizName, selectedItems } = ctx.request.body;
+
+  const newQuiz = await new Quiz({ name: quizName, questions: [] });
+
+  console.log(newQuiz);
+
+  selectedItems.forEach(async _id => {
     const q = await Question.findOne({ _id });
-    newQuiz.questions.push(q.question);
+    await newQuiz.questions.push(q);
     console.log(q);
   });
 
