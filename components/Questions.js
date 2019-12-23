@@ -1,6 +1,7 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { Card, Layout } from '@shopify/polaris';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Card, Layout, Link } from '@shopify/polaris';
 import axios from 'axios';
+import _ from 'lodash';
 
 const Questions = () => {
   const [questions, setQuestions] = useState([]);
@@ -22,12 +23,19 @@ const Questions = () => {
     return (
       <Layout.Section key={q._id}>
         <Card title={q.question} sectioned>
-          <p>some info</p>
+          <p>{_.size(q.options)} options</p>
         </Card>
-      </Layout.Section>);
+      </Layout.Section>
+    );
   });
 
-  return <Layout>{displayQuestions}</Layout>;
+  return (
+    <Layout>
+      <Layout.Section>
+        <Link url="/create-question">Create New</Link>
+      </Layout.Section>
+      {displayQuestions}
+    </Layout>);
 };
 
 export default Questions;

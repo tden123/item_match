@@ -6,9 +6,12 @@ import {
   ResourceList,
   ResourceItem,
   Card,
-  TextStyle
+  Frame,
+  Toast,
+  TextStyle,
+  Link
 } from '@shopify/polaris';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const CreateQuiz = () => {
@@ -20,6 +23,14 @@ const CreateQuiz = () => {
   const [questions, setQuestions] = useState([]);
   const [quizName, setQuizName] = useState('');
 
+  const [active, setActive] = useState(false);
+
+  const toggleActive = useCallback(() => setActive((active) => !active), []);
+
+  const toastMarkup = active ? (
+    <Toast content="Quiz created" onDismiss={toggleActive} duration={1000} />
+  ) : null;
+
   const resourceName = {
     singular: 'Question',
     plural: 'Questions'
@@ -27,7 +38,6 @@ const CreateQuiz = () => {
 
   const getItems = async () => {
     let user = await axios.get('/api/question');
-    console.log(user);
     setQuestions(user.data.questions);
   };
 
@@ -53,6 +63,7 @@ const CreateQuiz = () => {
 
   return questions.length > 0 ? (
     <Fragment>
+      <Link url="/quizes">Back to quizes</Link>
       <Form noValidate onSubmit={handleSubmit}>
         <FormLayout>
           <TextField
@@ -74,11 +85,12 @@ const CreateQuiz = () => {
             />
           </Card>
 
-          <Button primary submit>
+          <Button primary submit onClick={toggleActive}>
             Create Quiz
           </Button>
         </FormLayout>
       </Form>
+      <Frame>{toastMarkup}</Frame>
     </Fragment>
   ) : (
       <Fragment>Loading...</Fragment>

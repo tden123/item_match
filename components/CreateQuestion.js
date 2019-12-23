@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ResourcePicker } from '@shopify/app-bridge-react';
 import {
   TextField,
@@ -6,22 +6,21 @@ import {
   FormLayout,
   Button,
   Banner,
+  Toast,
+  Link,
+  Frame,
   ButtonGroup
 } from '@shopify/polaris';
 import _ from 'lodash';
 import axios from 'axios';
 
 const CreateQuestion = () => {
-
-  useEffect(() => {
-
-  }, []);
-
   const [options, setOptions] = useState({});
   const [question, setQuestion] = useState('');
   const [numOptions, setNumOptions] = useState(2);
   const [open, setOpen] = useState(false);
   const [currOption, setCurrOption] = useState(0);
+  const [active, setActive] = useState(false);
 
   const resetState = () => {
     setOptions({});
@@ -29,6 +28,12 @@ const CreateQuestion = () => {
     setNumOptions(2);
     setCurrOption(0);
   };
+
+  const toggleActive = useCallback(() => setActive((active) => !active), []);
+
+  const toastMarkup = active ? (
+    <Toast content="Question created" onDismiss={toggleActive} duration={1000} />
+  ) : null;
 
   const handleAddOption = useCallback(() => {
     if (numOptions >= 4) {
@@ -141,6 +146,7 @@ const CreateQuestion = () => {
         }}
       />
 
+      <Link url="/questions">Back to questions</Link>
       <Form noValidate onSubmit={handleSubmit}>
         <FormLayout>
           <TextField
@@ -174,11 +180,14 @@ const CreateQuestion = () => {
 
           {displayOptions(_.range(1, parseInt(numOptions, 10) + 1))}
 
-          <Button primary submit>
+
+          <Button primary submit onClick={toggleActive}>
             Submit
           </Button>
         </FormLayout>
       </Form>
+      <Frame>{toastMarkup}</Frame>
+
     </React.Fragment>
   );
 };
