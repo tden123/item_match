@@ -20,13 +20,15 @@ const Index = () => {
   const displayQuizes = quizes => {
     return quizes.map(quiz => {
       return (
-        <Card key={quiz._id}>
-          {quiz.quizName}
-        </Card>
+        <Layout.Section key={quiz._id}>
+          <Card title={quiz.quizName} sectioned>
+            <p>{quiz.questions.length} questions</p>
+          </Card>
+        </Layout.Section>
+
       );
     });
   };
-
 
   if (quizes.length > 0) {
     return (

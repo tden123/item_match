@@ -8,20 +8,24 @@ const Quiz = require('../models/Quiz');
 // @desc    Create a new question and store in user
 // @access  Private
 router.post('/create_quiz', async (ctx, next) => {
-  //const user = await User.findOne({ shop: ctx.session.shop });
 
   const { quizName, selectedItems } = ctx.request.body;
-  let shopName = ctx.session.shop;
+  let shop = ctx.session.shop;
 
-  const newQuiz = await new Quiz({ quizName, questions: [], shopName });
+  const newQuiz = new Quiz({ quizName, questions: [], shop });
 
-  selectedItems.forEach(async _id => {
-    const q = await Question.findOne({ _id });
-    await newQuiz.questions.push(q);
-    console.log(q);
-  });
+  const foundQuestions = await Question.find({ shop });
+  const filtered = foundQuestions.filter(q => selectedItems.includes(q._id.toString()));
+
+  newQuiz.questions = filtered;
 
   await newQuiz.save();
+
+  const user = await User.findOne({ shop });
+  user.quizes.push(newQuiz);
+  await user.save();
+
+
   console.log('new quiz created...');
 });
 
@@ -29,11 +33,11 @@ router.post('/create_quiz', async (ctx, next) => {
 // @desc    Create a new question and store in user
 // @access  Private
 router.get('/', async (ctx, next) => {
-  const quizes = await Quiz.find({ shopName: ctx.session.shop });
+  const quizes = await Quiz.find({ shop: ctx.session.shop });
   if (quizes.length > 0) {
     ctx.body = quizes;
   } else {
-    console.log('nothing found');
+    ctx.body = [];
   }
 });
 

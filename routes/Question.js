@@ -12,7 +12,7 @@ router.post('/create_question', async (ctx, next) => {
 
   try {
     let user = await User.findOne({ shop });
-    let newQuestion = await new Question({ question, options });
+    let newQuestion = await new Question({ question, options, shop });
     await newQuestion.save();
     user.questions.push(newQuestion);
     await user.save();
