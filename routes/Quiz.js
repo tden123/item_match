@@ -30,7 +30,7 @@ router.post('/create_quiz', async (ctx, next) => {
 });
 
 // @route   GET api/quiz
-// @desc    Create a new question and store in user
+// @desc    Get all quizes for current shop
 // @access  Private
 router.get('/', async (ctx, next) => {
   const quizes = await Quiz.find({ shop: ctx.session.shop });

@@ -56,8 +56,8 @@ const CreateQuestion = () => {
   const handleQuestion = useCallback(question => setQuestion(question), []);
 
   const handleSubmit = useCallback(async () => {
-    resetState();
     await axios.post('/api/question/create_question', { question, options });
+    resetState();
   });
 
   const handleChange = (item, value) => {
