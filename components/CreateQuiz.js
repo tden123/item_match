@@ -31,15 +31,13 @@ const CreateQuiz = () => {
     setQuestions(user.data.questions);
   };
 
-  const resetInputs = () => {
+  const resetState = () => {
     setSelectedItems([]);
-    setQuestions([]);
     setQuizName('');
   }
 
   const handleSubmit = async () => {
-    await axios.post('/api/quiz/create_quiz', { selectedItems, quizName });
-    resetInputs();
+    await axios.post('/api/quiz/create_quiz', { selectedItems, quizName }).then(resetState());
   };
 
   function renderItem(item) {

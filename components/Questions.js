@@ -1,7 +1,8 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { Card, Layout } from '@shopify/polaris';
 import axios from 'axios';
 
-export const UserQuestions = () => {
+const Questions = () => {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -11,7 +12,6 @@ export const UserQuestions = () => {
   const handleData = useCallback(async () => {
     try {
       const user = await axios.get('/api/question');
-      console.log(user);
       setQuestions(user.data.questions);
     } catch (error) {
       console.error(error.message);
@@ -19,8 +19,15 @@ export const UserQuestions = () => {
   });
 
   const displayQuestions = questions.map(q => {
-    return <div key={q._id}>{q.question}</div>;
+    return (
+      <Layout.Section key={q._id}>
+        <Card title={q.question} sectioned>
+          <p>some info</p>
+        </Card>
+      </Layout.Section>);
   });
 
-  return <Fragment>{displayQuestions}</Fragment>;
+  return <Layout>{displayQuestions}</Layout>;
 };
+
+export default Questions;

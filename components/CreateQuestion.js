@@ -12,6 +12,11 @@ import _ from 'lodash';
 import axios from 'axios';
 
 const CreateQuestion = () => {
+
+  useEffect(() => {
+
+  }, []);
+
   const [options, setOptions] = useState({});
   const [question, setQuestion] = useState('');
   const [numOptions, setNumOptions] = useState(2);
@@ -56,8 +61,7 @@ const CreateQuestion = () => {
   const handleQuestion = useCallback(question => setQuestion(question), []);
 
   const handleSubmit = useCallback(async () => {
-    await axios.post('/api/question/create_question', { question, options });
-    resetState();
+    await axios.post('/api/question/create_question', { question, options }).then(resetState());
   });
 
   const handleChange = (item, value) => {

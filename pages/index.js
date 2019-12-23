@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
-const Index = () => {
+const IndexPage = () => {
 
   useEffect(() => {
     getQuizes()
@@ -63,4 +63,4 @@ const Index = () => {
   }
 };
 
-export default Index;
+export default IndexPage;

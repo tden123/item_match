@@ -3,17 +3,13 @@ import {
   Page
 } from '@shopify/polaris';
 import CreateQuestion from '../components/CreateQuestion';
-import { UserQuestions } from '../components/UserQuestions';
 
-const Question = () => {
+const CreateQuestionPage = () => {
   return (
-    <Fragment>
-      <Page>
-        <CreateQuestion />
-        <UserQuestions />
-      </Page>
-    </Fragment>
+    <Page>
+      <CreateQuestion />
+    </Page>
   );
 };
 
-export default Question;
+export default CreateQuestionPage;

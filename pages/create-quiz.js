@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import CreateQuiz from '../components/CreateQuiz';
 import { Page } from '@shopify/polaris';
 
-const Quiz = () => {
+const CreateQuizPage = () => {
   return (
     <Page>
       <CreateQuiz />
@@ -10,4 +10,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default CreateQuizPage;
