@@ -7,7 +7,6 @@ const { verifyRequest } = require('@shopify/koa-shopify-auth');
 const session = require('koa-session');
 const connectDB = require('./db');
 const bodyParser = require('koa-bodyparser');
-const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 
 dotenv.config();

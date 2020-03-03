@@ -18,6 +18,7 @@ const Quizes = () => {
     }
 
     const displayQuizes = quizes => {
+        if (!quizes || quizes.length < 1) return <div>No Quizes to display...</div>
         return quizes.map(quiz => {
             return (
                 <Layout.Section key={quiz._id}>
@@ -30,24 +31,16 @@ const Quizes = () => {
         });
     };
 
-    if (quizes.length > 0) {
-        return (
-            <React.Fragment>
-                <Layout.Section>
-                    <Link url="/create-quiz">Create New</Link>
-                </Layout.Section>
-                {displayQuizes(quizes)}
-            </React.Fragment>
-        )
-    } else {
-        return (
-            <React.Fragment>
-                Loading...
-            </React.Fragment>
 
+    return (
+        <React.Fragment>
+            <Layout.Section>
+                <Link url="/create-quiz">Create New</Link>
+            </Layout.Section>
+            {displayQuizes(quizes)}
+        </React.Fragment>
+    )
 
-        );
-    }
 };
 
 export default Quizes;

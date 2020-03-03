@@ -17,6 +17,10 @@ router.post('/create_quiz', async (ctx, next) => {
   const foundQuestions = await Question.find({ shop });
   const filtered = foundQuestions.filter(q => selectedItems.includes(q._id.toString()));
 
+  console.log(shop);
+  console.log(filtered);
+  console.log(newQuiz);
+
   newQuiz.questions = filtered;
 
   await newQuiz.save();
